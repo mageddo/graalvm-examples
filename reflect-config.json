@@ -33,5 +33,19 @@
 		"methods" : [
 			{ "name" : "<init>", "parameterTypes" : [] }
 		]
+	},
+	{
+		"name" : "org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor",
+		"fields" : [],
+		"methods" : [
+			{ "name" : "<init>", "parameterTypes" : [] }
+		]
+	},
+	{
+		"name" : "org.springframework.context.annotation.CommonAnnotationBeanPostProcessor",
+		"fields" : [],
+		"methods" : [
+			{ "name" : "<init>", "parameterTypes" : [] }
+		]
 	}
 ]
