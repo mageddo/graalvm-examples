@@ -50,6 +50,7 @@ java {
 
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE")
+	compile(group: 'org.codehaus.groovy', name: 'groovy', version: '2.5.5')
 //	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 //	compile("org.jetbrains.kotlin:kotlin-reflect")
 }
