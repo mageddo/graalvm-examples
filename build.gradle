@@ -16,10 +16,19 @@ repositories {
 	mavenCentral()
 }
 
+configurations {
+	compile.exclude module: 'log4j-to-slf4j'
+	compile.exclude module: 'jul-to-slf4j'
+}
+
 graal {
 	graalVersion('1.0.0-rc11')
 	outputName('graal')
 	mainClass('com.mageddo.springbootgraalvm.GraalVmStarter')
+	option('--report-unsupported-elements-at-runtime')
+	option('--allow-incomplete-classpath')
+	option('--delay-class-initialization-to-runtime=org.springframework.core.io.VfsUtils')
+	option('--delay-class-initialization-to-runtime=org.apache.commons.logging.LogAdapter$Log4jLog')
 }
 
 application {
