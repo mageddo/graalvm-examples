@@ -1,0 +1,37 @@
+[
+	{
+		"name" : "java.lang.Class",
+		"allDeclaredConstructors" : true,
+		"allPublicConstructors" : true,
+		"allDeclaredMethods" : true,
+		"allPublicMethods" : true
+	},
+	{
+		"name" : "org.springframework.context.annotation.AnnotationConfigApplicationContext",
+		"fields" : [],
+		"methods" : [
+			{ "name" : "<init>", "parameterTypes" : [] }
+		]
+	},
+	{
+		"name" : "org.springframework.context.annotation.ConfigurationClassPostProcessor",
+		"fields" : [],
+		"methods" : [
+			{ "name" : "<init>", "parameterTypes" : [] }
+		]
+	},
+	{
+		"name" : "org.springframework.context.event.EventListenerMethodProcessor",
+		"fields" : [],
+		"methods" : [
+			{ "name" : "<init>", "parameterTypes" : [] }
+		]
+	},
+	{
+		"name" : "org.springframework.context.event.DefaultEventListenerFactory",
+		"fields" : [],
+		"methods" : [
+			{ "name" : "<init>", "parameterTypes" : [] }
+		]
+	}
+]
