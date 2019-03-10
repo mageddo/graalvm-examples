@@ -15,7 +15,7 @@ graal {
 	option("-H:IncludeResources=META-INF/.*.json|META-INF/spring.factories|org/springframework/boot/logging/.*")
 	option("--allow-incomplete-classpath")
 	option("--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,org.springframework.core.io.VfsUtils,org.springframework.format.support.DefaultFormattingConversionService")
-	option("-H:ReflectionConfigurationFiles=graal/app.json,graal/boot.json,graal/framework.json,graal/log4j.json,graal/netty.json")
+	option("-H:ReflectionConfigurationFiles=graal/boot.json,graal/framework.json,graal/log4j.json,graal/netty.json")
 	option("-Dio.netty.noUnsafe=true")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-Dfile.encoding=UTF-8")
@@ -27,6 +27,7 @@ dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-webflux:2.1.3.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-mustache:2.1.3.RELEASE")
+	implementation("org.graalvm.sdk:graal-sdk:1.0.0-rc13")
 
 	testImplementation("org.springframework:spring-test:5.1.5.RELEASE")
 	testImplementation("io.projectreactor:reactor-test:3.2.6.RELEASE")

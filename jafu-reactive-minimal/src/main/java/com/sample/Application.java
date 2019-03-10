@@ -1,17 +1,29 @@
 package com.sample;
 
+import static com.sample.ReflectionClasses.getBeans;
 import static org.springframework.fu.jafu.Jafu.webApplication;
 import static org.springframework.fu.jafu.web.WebFluxServerDsl.server;
 
+import org.graalvm.nativeimage.Feature;
+import org.graalvm.nativeimage.RuntimeReflection;
 import org.springframework.fu.jafu.JafuApplication;
 
-public class Application {
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+
+public class Application implements Feature {
+
+	static {
+		ReflectionClasses.setupClasses();
+	}
 
 	public static JafuApplication app = webApplication(a -> {
 		a.beans(b -> {
-			b.bean(SampleHandler.class);
-			b.bean(SampleService.class);
-			b.bean(ApplicationContextProvider.class);
+			for (Class<?> bean : getBeans()) {
+				b.bean(bean);
+			}
 		});
 
 		a.enable(server(s -> {
