@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property
+		name="log_pattern"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-15.15thread] %3.-3level \${PID:- } %-0.70logger{35} m=%method l=%line %msg%n}"
+	/>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${log_pattern}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="console"/>
+	</root>
+	<logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="DEBUG" />
+	<logger name="org.apache.http.client.protocol.ResponseProcessCookies" level="ERROR" />
+</configuration>

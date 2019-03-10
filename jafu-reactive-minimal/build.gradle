@@ -14,6 +14,8 @@ graal {
 	mainClass("com.sample.Application")
 	option("-H:IncludeResources=META-INF/.*.json|META-INF/spring.factories|org/springframework/boot/logging/.*")
 	option("-H:IncludeResources=static/.*")
+	option("-H:IncludeResources=application.properties")
+//	option("-H:IncludeResources=logback.xml")
 	option("--allow-incomplete-classpath")
 	option("--delay-class-initialization-to-runtime=org.springframework.core.io.VfsUtils,org.springframework.format.support.DefaultFormattingConversionService")
 	option("-H:ReflectionConfigurationFiles=graal/boot.json,graal/framework.json,graal/log4j.json")
