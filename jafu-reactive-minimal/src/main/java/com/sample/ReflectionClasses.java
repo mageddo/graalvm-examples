@@ -28,11 +28,18 @@ public class ReflectionClasses {
 	}
 
 	static void setupClasses() {
-		for (final Class<?> clazz : getBeans()) {
-			process(clazz);
-		}
-		for (final Class<?> clazz : getClasses()) {
-			process(clazz);
+		try {
+			System.out.println("> Loading classes for future reflection support");
+			for (final Class<?> clazz : getBeans()) {
+				process(clazz);
+			}
+			for (final Class<?> clazz : getClasses()) {
+				process(clazz);
+			}
+		} catch (Error e){
+			if(!e.getMessage().contains("The class ImageSingletons can only be used when building native images")){
+				throw e;
+			}
 		}
 	}
 
@@ -41,7 +48,6 @@ public class ReflectionClasses {
 	 */
 	private static void process(Class<?> clazz) {
 		try {
-			System.out.println("> Loading classes for future reflection support");
 			System.out.println("> Declaring class: " + clazz.getCanonicalName());
 			for (final Method method : clazz.getMethods()) {
 				System.out.println("\t> method: " + method.getName() + "(" + method.getParameterCount() + ")");

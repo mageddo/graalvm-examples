@@ -12,11 +12,10 @@ graal {
 	graalVersion("1.0.0-rc13")
 	outputName(project.name)
 	mainClass("com.sample.Application")
-	option("-H:IncludeResources=META-INF/.*.json|META-INF/spring.factories|org/springframework/boot/logging/.*")
+	option("-H:IncludeResources=static|META-INF/.*.json|META-INF/spring.factories|org/springframework/boot/logging/.*")
 	option("--allow-incomplete-classpath")
-	option("--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,org.springframework.core.io.VfsUtils,org.springframework.format.support.DefaultFormattingConversionService")
-	option("-H:ReflectionConfigurationFiles=graal/boot.json,graal/framework.json,graal/log4j.json,graal/netty.json")
-	option("-Dio.netty.noUnsafe=true")
+	option("--delay-class-initialization-to-runtime=org.springframework.core.io.VfsUtils,org.springframework.format.support.DefaultFormattingConversionService")
+	option("-H:ReflectionConfigurationFiles=graal/boot.json,graal/framework.json,graal/log4j.json")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-Dfile.encoding=UTF-8")
 	option("--no-server")
@@ -26,6 +25,7 @@ dependencies {
 	implementation("org.springframework.fu:spring-fu-jafu:0.0.6.BUILD-SNAPSHOT")
 
 	implementation("org.springframework.boot:spring-boot-starter-webflux:2.1.3.RELEASE")
+	implementation("org.springframework.boot:spring-boot-starter-jetty:2.1.3.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-mustache:2.1.3.RELEASE")
 	implementation("org.graalvm.sdk:graal-sdk:1.0.0-rc13")
 
@@ -48,9 +48,5 @@ repositories {
 configurations.all {
 	exclude module: "javax.annotation-api"
 	exclude module: "hibernate-validator"
-	if (project.hasProperty("graal")) {
-		exclude module: "netty-transport-native-epoll"
-		exclude module: "netty-transport-native-unix-common"
-		exclude module: "netty-codec-http2"
-	}
+	exclude module: "spring-boot-starter-reactor-netty"
 }
