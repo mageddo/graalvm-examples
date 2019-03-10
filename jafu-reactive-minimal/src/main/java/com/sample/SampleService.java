@@ -9,6 +9,9 @@ public class SampleService {
 		return "Hello world!";
 	}
 
+	/**
+	 * Just making sure programmatic injection still work
+	 */
 	private SampleService self(){
 		return context().getBean(SampleService.class);
 	}

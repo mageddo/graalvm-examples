@@ -7,6 +7,9 @@ import java.lang.reflect.Method;
 
 public class ReflectionClasses {
 
+	/**
+	 * All classes defined here will have reflection support and be registered as spring beans
+	 */
 	static Class<?>[] getBeans(){
 		return new Class[]{
 			ApplicationContextProvider.class,
@@ -15,6 +18,9 @@ public class ReflectionClasses {
 		};
 	}
 
+	/**
+	 * All classes defined here will have reflection support
+	 */
 	static Class<?>[] getClasses(){
 		return new Class[]{
 			Sample.class
@@ -30,6 +36,9 @@ public class ReflectionClasses {
 		}
 	}
 
+	/**
+	 * Register all constructors and methods on graalvm to reflection support at runtime
+	 */
 	private static void process(Class<?> clazz) {
 		try {
 			System.out.println("> Loading classes for future reflection support");
