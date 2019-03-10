@@ -11,7 +11,9 @@ public class Application {
 		a.beans(b -> {
 			b.bean(SampleHandler.class);
 			b.bean(SampleService.class);
+			b.bean(ApplicationContextProvider.class);
 		});
+
 		a.enable(server(s -> {
 			s.port(s.profiles().contains("test") ? 8181 : 8080);
 			s.router(r -> {
