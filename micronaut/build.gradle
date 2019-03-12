@@ -1,9 +1,29 @@
 plugins {
 	id "java"
+	id "com.palantir.graal" version "0.3.0-2-g6c49b4d"
 }
 repositories {
 	mavenLocal()
 	mavenCentral()
+}
+
+graal {
+	mainClass "com.mageddo.micronaut.Application"
+	graalVersion("1.0.0-rc13")
+	outputName(project.name)
+	option("-H:IncludeResources=static/.*")
+	option("-H:IncludeResources=logback.xml|application.yml|META-INF/services/*.*")
+	option("-H:IncludeResources=application.properties")
+	option("--allow-incomplete-classpath")
+//	option("-H:ReflectionConfigurationFiles=build/reflect.json")
+	option("--rerun-class-initialization-at-runtime=sun.security.jca.JCAUtil\$CachedSecureRandomHolder,javax.net.ssl.SSLContext")
+	option("--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
+	option("-H:+ReportUnsupportedElementsAtRuntime")
+	option("-H:-UseServiceLoaderFeature")
+	option("-H:EnableURLProtocols=http")
+//	option("--enable-url-protocols=http")
+	option("-Dfile.encoding=UTF-8")
+	option("--no-server")
 }
 dependencies {
 	compile ("io.micronaut.configuration:jdbc-hikari:1.0.0.RC2")
@@ -30,3 +50,15 @@ dependencies {
 	runtime "ch.qos.logback:logback-classic:1.2.3"
 
 }
+
+task fatJar(type: Jar) {
+	baseName = project.name + '-all'
+	manifest {
+		attributes (
+			'Class-Path': configurations.compile.collect { "lib/${it.name}" }.join(' ')
+		)
+	}
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}
+
