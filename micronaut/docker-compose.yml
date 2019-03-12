@@ -1,0 +1,13 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      - TZ=UTC
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=db
+    ports:
+      - 5433:5432
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d

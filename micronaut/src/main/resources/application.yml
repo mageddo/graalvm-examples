@@ -1,0 +1,12 @@
+---
+micronaut:
+  application:
+    name: micronaut
+
+---
+datasources:
+  default:
+    url: jdbc:postgresql://0.0.0.0:5433/db
+    username: root
+    password: root
+    driverClassName: org.postgresql.Driver
