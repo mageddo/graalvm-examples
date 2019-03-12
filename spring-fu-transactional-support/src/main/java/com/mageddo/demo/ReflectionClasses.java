@@ -8,11 +8,22 @@ import org.graalvm.nativeimage.RuntimeReflection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
 
+@Transactional(
+	transactionManager = "", propagation = Propagation.NEVER, isolation = Isolation.DEFAULT,
+	noRollbackFor = Throwable.class, rollbackFor = Throwable.class,
+	timeout = 5,
+	readOnly = true,
+	rollbackForClassName = "",
+	noRollbackForClassName = ""
+)
 class ReflectionClasses {
 
 	/**
@@ -37,7 +48,8 @@ class ReflectionClasses {
 		return new Class[]{
 			java.sql.Statement[].class,
 			UndeclaredThrowableException.class,
-			FruitEntity.class
+			FruitEntity.class,
+			Transactional.class
 		};
 	}
 
