@@ -64,6 +64,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux:2.1.3.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-jetty:2.1.3.RELEASE")
 	compile group: 'org.springframework', name: 'spring-jdbc', version: '5.1.5.RELEASE'
+	compile group: 'io.projectreactor.netty', name: 'reactor-netty', version: '0.8.5.RELEASE'
+
 
 	implementation ("org.aspectj:aspectjrt:1.9.2")
 	provided ("org.aspectj:aspectjweaver:1.9.2")

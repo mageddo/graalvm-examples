@@ -2,6 +2,7 @@ package com.mageddo.demo;
 
 import com.mageddo.demo.controller.FruitsController;
 import com.mageddo.demo.dao.FruitsDAOPg;
+import com.mageddo.demo.entity.FruitEntity;
 import com.mageddo.demo.service.FruitsService;
 import org.graalvm.nativeimage.RuntimeReflection;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,7 +36,8 @@ class ReflectionClasses {
 	static Class<?>[] getClasses(){
 		return new Class[]{
 			java.sql.Statement[].class,
-			UndeclaredThrowableException.class
+			UndeclaredThrowableException.class,
+			FruitEntity.class
 		};
 	}
 
