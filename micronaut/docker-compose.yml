@@ -11,3 +11,8 @@ services:
       - 5433:5432
     volumes:
       - ./initdb.d:/docker-entrypoint-initdb.d
+
+  nativeimage:
+    build:
+      context: .
+      dockerfile: src/main/docker/nativeimage/Dockerfile
