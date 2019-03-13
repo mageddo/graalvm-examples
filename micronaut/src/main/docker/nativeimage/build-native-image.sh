@@ -1,5 +1,3 @@
-pwd
-echo $HOME
 echo "> Building jar"
 ./gradlew clean assemble
 

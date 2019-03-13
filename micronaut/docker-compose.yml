@@ -12,9 +12,8 @@ services:
     volumes:
       - ./initdb.d:/docker-entrypoint-initdb.d
 
-  nativeimage:
+  native-image:
+    image: defreitas/micronaut-native-image:latest
     build:
       context: .
       dockerfile: src/main/docker/nativeimage/Dockerfile
-    volumes:
-      - /root/.gradle:/root/.gradle
