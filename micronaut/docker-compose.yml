@@ -16,3 +16,5 @@ services:
     build:
       context: .
       dockerfile: src/main/docker/nativeimage/Dockerfile
+    volumes:
+      - /root/.gradle:/root/.gradle

@@ -1,5 +1,15 @@
+pwd
+echo $HOME
+echo "> Building jar"
+./gradlew clean assemble
+
+echo "> Discovering refletion classes"
+export JAR_CLASS_PATH=build/libs/micronaut.jar
+java -cp ${JAR_CLASS_PATH} io.micronaut.graal.reflect.GraalClassLoadingAnalyzer
+
+echo "> Building binary file"
 native-image --no-server \
-	--class-path build/libs/*.jar \
+	--class-path "${JAR_CLASS_PATH}" \
 	-H:ReflectionConfigurationFiles=build/reflect.json \
 	-H:EnableURLProtocols=http \
 	-H:IncludeResources="logback.xml|application.yml" \
