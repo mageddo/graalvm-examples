@@ -1,0 +1,9 @@
+[
+	{
+		"name": "java.sql.Statement",
+		"allDeclaredConstructors" : true,
+		"allPublicConstructors" : true,
+		"allPublicMethods": true,
+		"allDeclaredMethods": true
+	}
+]

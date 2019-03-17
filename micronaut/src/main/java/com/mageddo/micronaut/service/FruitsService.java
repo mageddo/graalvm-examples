@@ -1,4 +1,4 @@
-package com.mageddo.micronaut;
+package com.mageddo.micronaut.service;
 
 import com.mageddo.micronaut.dao.FruitsDAO;
 import com.mageddo.micronaut.entity.FruitEntity;

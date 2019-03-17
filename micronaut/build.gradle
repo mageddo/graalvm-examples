@@ -22,25 +22,28 @@ graal {
 	mainClass "com.mageddo.micronaut.Application"
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-	option("--classpath build/libs/micronaut.jar")
+//	option("--classpath build/libs/micronaut.jar")
 	option("-H:IncludeResources=static/.*")
 	option("-H:IncludeResources=logback.xml|application.yml")
 	option("-H:IncludeResources=application.properties")
 	option("--allow-incomplete-classpath")
-	option("-H:ReflectionConfigurationFiles=build/reflect.json")
-	option("-H:+AllowVMInspection")
-	option("--rerun-class-initialization-at-runtime=sun.security.jca.JCAUtil\$CachedSecureRandomHolder,javax.net.ssl.SSLContext")
+//	option("-H:ReflectionConfigurationFiles=build/reflect.json")
+//	option("-H:+AllowVMInspection")
+//	option("--rerun-class-initialization-at-runtime=sun.security.jca.JCAUtil\$CachedSecureRandomHolder,javax.net.ssl.SSLContext")
 	option("--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
-	option("-H:-UseServiceLoaderFeature")
+//	option("-H:-UseServiceLoaderFeature")
 	option("-H:EnableURLProtocols=http")
 	option("-Dfile.encoding=UTF-8")
 	option("--no-server")
 }
 dependencies {
 
-	compile ("io.micronaut.configuration:jdbc-hikari:1.0.0.RC2")
+//	compile ("io.micronaut.configuration:jdbc-hikari:1.0.0.RC2")
+	compile 'com.zaxxer:HikariCP:3.3.1'
 	compile ("org.postgresql:postgresql:42.2.5")
+	compile group: 'net.java.dev.jna', name: 'jna', version: '5.2.0'
+	compile group: 'net.java.dev.jna', name: 'jna-platform', version: '5.2.0'
 
 	compile ("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	compile ("io.micronaut:micronaut-spring:${micronautVersion}")
@@ -61,8 +64,9 @@ dependencies {
 	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
 //	tag::graal[]
-	compileOnly "com.oracle.substratevm:svm:${graalVMVersion}"
-	runtime "io.micronaut:micronaut-graal:${micronautVersion}"
+//	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
+//	runtime("io.micronaut:micronaut-graal:${micronautVersion}")
+	compile("org.graalvm.sdk:graal-sdk:1.0.0-rc13")
 	//end::graal[]
 
 	runtime "ch.qos.logback:logback-classic:1.2.3"
