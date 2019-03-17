@@ -3,18 +3,20 @@ echo "> Building jar"
 
 echo "> Discovering refletion classes"
 export JAR_CLASS_PATH=build/libs/micronaut.jar
-#java -cp ${JAR_CLASS_PATH} io.micronaut.graal.reflect.GraalClassLoadingAnalyzer
+java -cp ${JAR_CLASS_PATH} io.micronaut.graal.reflect.GraalClassLoadingAnalyzer
 
+#	-H:PrintFlags=Expert \
 echo "> Building binary file"
-#	-H:ReflectionConfigurationFiles='build/reflect.json,graal/reflect.json' \
 native-image --no-server \
 	--class-path "${JAR_CLASS_PATH}" \
+	-H:ReflectionConfigurationFiles='build/reflect.json' \
 	-H:EnableURLProtocols=http \
 	-H:IncludeResources="logback.xml|application.yml" \
 	-H:Name=micronaut \
 	-H:Class=com.mageddo.micronaut.Application \
 	-H:+ReportUnsupportedElementsAtRuntime \
 	-H:+ReportExceptionStackTraces \
+	-H:+UseServiceLoaderFeature \
 	-H:+AllowVMInspection \
 	--allow-incomplete-classpath \
 	--rerun-class-initialization-at-runtime='sun.security.jca.JCAUtil$CachedSecureRandomHolder,javax.net.ssl.SSLContext' \
