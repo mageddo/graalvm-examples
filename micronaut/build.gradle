@@ -20,6 +20,11 @@ task debug(type: JavaExec){
 	main = className
 }
 
+task run(type: JavaExec){
+	classpath = sourceSets.main.runtimeClasspath
+	main = className
+}
+
 graal {
 	mainClass className
 	graalVersion(graalVMVersion)
