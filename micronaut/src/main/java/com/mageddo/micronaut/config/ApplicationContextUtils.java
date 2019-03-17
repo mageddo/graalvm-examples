@@ -1,4 +1,4 @@
-package com.mageddo.micronaut.aspect;
+package com.mageddo.micronaut.config;
 
 import io.micronaut.context.ApplicationContext;
 

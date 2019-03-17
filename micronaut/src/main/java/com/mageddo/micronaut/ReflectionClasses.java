@@ -33,7 +33,6 @@ class ReflectionClasses implements Feature {
 		return new Class[]{
 			java.sql.Statement[].class,
 			FruitEntity.class,
-//			FruitsService.class,
 			Transactional.class
 		};
 	}

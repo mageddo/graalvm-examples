@@ -1,6 +1,6 @@
 package com.mageddo.micronaut;
 
-import com.mageddo.micronaut.aspect.ApplicationContextUtils;
+import com.mageddo.micronaut.config.ApplicationContextUtils;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.runtime.Micronaut;
 
