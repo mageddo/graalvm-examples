@@ -16,7 +16,6 @@ public class FruitsController {
 	private final ObjectMapper objectMapper;
 	private final FruitsService fruitsService;
 
-	@Inject
 	public FruitsController(ObjectMapper objectMapper, FruitsService fruitsService) {
 		this.objectMapper = objectMapper;
 		this.fruitsService = fruitsService;
