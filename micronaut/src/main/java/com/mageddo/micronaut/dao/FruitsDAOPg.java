@@ -4,10 +4,13 @@ package com.mageddo.micronaut.dao;
 import com.mageddo.micronaut.entity.FruitEntity;
 import com.mageddo.rawstringliterals.RawString;
 import com.mageddo.rawstringliterals.Rsl;
+import io.micronaut.context.ApplicationContextProvider;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.inject.Singleton;
+import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,13 +21,16 @@ import static com.mageddo.rawstringliterals.RawStrings.lateInit;
 public class FruitsDAOPg implements FruitsDAO {
 
 	private final NamedParameterJdbcTemplate parameterJdbcTemplate;
+	private final DataSource dataSource;
 
-	public FruitsDAOPg(NamedParameterJdbcTemplate parameterJdbcTemplate) {
+	public FruitsDAOPg(NamedParameterJdbcTemplate parameterJdbcTemplate, DataSource dataSource) {
 		this.parameterJdbcTemplate = parameterJdbcTemplate;
+		this.dataSource = dataSource;
 	}
 
 	@Override
 	public void traceSelect() {
+		System.out.println("connection=" + DataSourceUtils.getConnection(dataSource));
 		parameterJdbcTemplate.update(
 			"INSERT INTO FRUITS_TRACE VALUES (:v)",
 			new MapSqlParameterSource().addValue("v", LocalDateTime.now().toString())
@@ -33,6 +39,7 @@ public class FruitsDAOPg implements FruitsDAO {
 
 	@Override
 	public List<FruitEntity> getFruits() {
+		System.out.println("connection=" + DataSourceUtils.getConnection(dataSource));
 		/*
 		SELECT NAM_FRUIT FROM FRUITS
 		*/

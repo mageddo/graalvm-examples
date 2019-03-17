@@ -1,6 +1,7 @@
 plugins {
 	id "java"
 	id "com.palantir.graal" version "0.3.0-2-g6c49b4d"
+	id "io.freefair.aspectj.post-compile-weaving" version "3.1.4"
 }
 
 repositories {
@@ -11,8 +12,16 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
+def className = "com.mageddo.micronaut.Application"
+
+task debug(type: JavaExec){
+	debug = true
+	classpath = sourceSets.main.runtimeClasspath
+	main = className
+}
+
 graal {
-	mainClass "com.mageddo.micronaut.Application"
+	mainClass className
 	graalVersion(graalVMVersion)
 	outputName(project.name)
 	option("-H:IncludeResources=static/.*")
@@ -61,6 +70,7 @@ dependencies {
 	//end::graal[]
 
 	runtime "ch.qos.logback:logback-classic:1.2.3"
+	implementation ("org.aspectj:aspectjrt:1.9.2")
 
 	testCompile "junit:junit:4.12"
 
