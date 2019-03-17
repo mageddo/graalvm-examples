@@ -8,9 +8,6 @@
   "name" : "com.fasterxml.jackson.datatype.jsr310.JSR310Module",
   "allDeclaredConstructors" : true
 }, {
-  "name" : "com.mageddo.rawstringliterals.Rsl",
-  "allDeclaredConstructors" : true
-}, {
   "name" : "io.micronaut.aop.Adapter",
   "allDeclaredConstructors" : true
 }, {
