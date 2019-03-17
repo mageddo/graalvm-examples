@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mageddo.micronaut;
+package com.mageddo.micronaut.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import io.micronaut.context.annotation.EachProperty;

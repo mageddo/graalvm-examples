@@ -1,9 +1,7 @@
-package com.mageddo.micronaut;
+package com.mageddo.micronaut.config;
 
 import com.mageddo.micronaut.entity.FruitEntity;
-import com.mageddo.micronaut.service.FruitsService;
 import com.oracle.svm.core.annotate.AutomaticFeature;
-import io.micronaut.spring.tx.annotation.Transactional;
 import org.graalvm.nativeimage.Feature;
 import org.graalvm.nativeimage.RuntimeReflection;
 

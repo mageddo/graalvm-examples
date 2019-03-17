@@ -1,4 +1,4 @@
-package com.mageddo.micronaut;
+package com.mageddo.micronaut.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import io.micronaut.context.annotation.Bean;
