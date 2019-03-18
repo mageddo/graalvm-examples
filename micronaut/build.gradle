@@ -1,6 +1,12 @@
+buildscript {
+	repositories {
+		mavenLocal()
+	}
+}
 plugins {
 	id "java"
 	id "com.palantir.graal" version "0.3.0-2-g6c49b4d"
+	id "com.mageddo.graal-reflection-configuration-generator" version "1.1.0"
 }
 
 repositories {
@@ -33,7 +39,7 @@ graal {
 	option("-H:IncludeResources=logback.xml|application.yml")
 	option("-H:IncludeResources=application.properties")
 	option("--allow-incomplete-classpath")
-	option("-H:ReflectionConfigurationFiles=graal/micronaut.json")
+	option("-H:ReflectionConfigurationFiles=build/reflect.json,graal/micronaut.json")
 	option("-H:+AllowVMInspection")
 	option("--rerun-class-initialization-at-runtime=sun.security.jca.JCAUtil\$CachedSecureRandomHolder,javax.net.ssl.SSLContext")
 	option("--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
@@ -69,6 +75,7 @@ dependencies {
 	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
 //	tag::graal[]
+	compile ("com.mageddo:graal-reflection-configuration:2.0.0")
 	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
 	runtime("io.micronaut:micronaut-graal:${micronautVersion}")
 	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")

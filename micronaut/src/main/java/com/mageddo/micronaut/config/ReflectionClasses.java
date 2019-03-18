@@ -1,6 +1,5 @@
 package com.mageddo.micronaut.config;
 
-import com.mageddo.micronaut.entity.FruitEntity;
 import com.oracle.svm.core.annotate.AutomaticFeature;
 import org.graalvm.nativeimage.Feature;
 import org.graalvm.nativeimage.RuntimeReflection;
@@ -31,7 +30,7 @@ class ReflectionClasses implements Feature {
 	static Class<?>[] getClasses(){
 		return new Class[]{
 			Statement[].class,
-			FruitEntity.class
+//			FruitEntity.class
 		};
 	}
 
