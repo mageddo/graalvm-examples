@@ -6,7 +6,11 @@ micronaut:
 ---
 datasources:
   default:
-    url: jdbc:postgresql://0.0.0.0:5433/db
+    jdbcUrl: jdbc:postgresql://0.0.0.0:5433/db
     username: root
     password: root
     driverClassName: org.postgresql.Driver
+    connectionTestQuery: SELECT 1
+    initializationFailTimeout: -1
+    minimumIdle: 1
+    maximumPoolSize: 10

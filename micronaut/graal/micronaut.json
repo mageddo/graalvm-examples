@@ -1,0 +1,175 @@
+[ {
+  "name" : "com.fasterxml.jackson.databind.PropertyNamingStrategy$UpperCamelCaseStrategy",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "com.fasterxml.jackson.datatype.jdk8.Jdk8Module",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "com.fasterxml.jackson.datatype.jsr310.JSR310Module",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.aop.Adapter",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Bean",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.BootstrapContextCompatible",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Configuration",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.ConfigurationProperties",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.ConfigurationReader",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Context",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.EachBean",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.EachProperty",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Factory",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Parallel",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Parameter",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Primary",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Property",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.PropertySource",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Prototype",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Replaces",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Requirements",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Type",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.context.annotation.Value",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.core.annotation.Experimental",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.core.annotation.Indexes",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.core.annotation.Internal",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.core.convert.format.ReadableBytes",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.annotation.Consumes",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.annotation.Controller",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.annotation.Filter",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.annotation.Get",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.annotation.Produces",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.client.NettyClientHttpRequestFactory",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.netty.cookies.NettyCookieFactory",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.server.cors.$BeanConfiguration",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.server.netty.NettyHttpResponseFactory",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.jackson.$BeanConfiguration",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.runtime.event.annotation.EventListener",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.scheduling.annotation.Schedules",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.netty.channel.socket.nio.NioServerSocketChannel",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.netty.channel.socket.nio.NioSocketChannel",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.reactivex.Completable",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.reactivex.Maybe",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.reactivex.Observable",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.reactivex.Single",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "java.lang.FunctionalInterface",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "javax.annotation.Nonnull",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "javax.annotation.Nullable",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "javax.annotation.PreDestroy",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "javax.inject.Inject",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "javax.inject.Named",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "javax.inject.Singleton",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "sun.security.ssl.SSLContextImpl$TLSContext",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "[Lio.micronaut.http.MediaType;",
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.hateoas.DefaultLink",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "io.micronaut.http.hateoas.JsonError",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+}, {
+  "name" : "java.lang.String",
+  "allPublicMethods" : true,
+  "allDeclaredConstructors" : true
+} ]
