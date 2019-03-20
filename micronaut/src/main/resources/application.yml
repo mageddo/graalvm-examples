@@ -2,7 +2,12 @@
 micronaut:
   application:
     name: micronaut
-
+  router:
+    static-resources:
+      default:
+        mapping: /static/**
+        paths:
+          - classpath:static
 ---
 datasources:
   default:
@@ -14,3 +19,7 @@ datasources:
     initializationFailTimeout: -1
     minimumIdle: 1
     maximumPoolSize: 10
+---
+micronaut:
+  views:
+    folder: templates
