@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.time.LocalDateTime;
 
-@RuntimeReflection
 public class FruitEntity {
 
 	private String name;
