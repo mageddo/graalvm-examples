@@ -1,0 +1,36 @@
+plugins {
+	id 'java'
+	id 'application'
+	id "com.palantir.graal" version "0.3.0-2-g6c49b4d"
+}
+
+repositories {
+	mavenLocal()
+	jcenter()
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+	implementation("org.xerial:sqlite-jdbc:3.27.2")
+	implementation("com.mageddo:graal-reflection-configuration:2.0.0")
+	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
+	implementation("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+	testImplementation("junit:junit:4.12")
+}
+
+mainClassName = "com.mageddo.sqlite.App"
+
+graal {
+	mainClass mainClassName
+	graalVersion(graalVMVersion)
+	outputName(project.name)
+	option("-H:IncludeResources=db/.*|static/.*|templates/.*|.*.yml|.*.xml|.*/org/sqlite/.*|org/sqlite/.*")
+	option("--allow-incomplete-classpath")
+	option("-H:+AllowVMInspection")
+	option("-H:+ReportUnsupportedElementsAtRuntime")
+	option("-H:EnableURLProtocols=http")
+	option("-Dfile.encoding=UTF-8")
+	option("--no-server")
+}
