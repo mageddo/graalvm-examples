@@ -35,7 +35,7 @@ graal {
 	mainClass className
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-	option("-H:IncludeResources=.*")
+	option("-H:IncludeResources=static/.*|templates/.*|.*.yml|.*.xml")
 	option("-H:IncludeResources=application.properties")
 	option("--allow-incomplete-classpath")
 	option("-H:ReflectionConfigurationFiles=build/reflect.json,graal/micronaut.json")
