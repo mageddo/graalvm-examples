@@ -30,8 +30,8 @@ Testing Views
 * [x] Transactional Support
 * [x] Thymeleaf template processing
 * [x] RESTFul
-* [ ] Static resources
-	* [ ] Server is ignoring file extension media type an returning plain/text for all files
+* [x] Static resources
+	* [x] Server is ignoring file extension media type an returning plain/text for all files
 	 			it makes browser don't process css files
 
 #### Reference
