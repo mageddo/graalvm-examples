@@ -1,0 +1,43 @@
+plugins {
+	id 'java'
+	id 'application'
+	id "com.palantir.graal" version "0.3.0-2-g6c49b4d"
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+mainClassName = 'Sample1'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+compileJava.doFirst {
+	def proc = ["${projectDir}/builder.bash"].execute()
+	def stdout = new StringBuilder()
+	proc.consumeProcessOutput(stdout, stdout)
+	if (proc.waitFor() != 0){
+		throw new Error("could not build c libs: " + stdout)
+	}
+}
+
+
+dependencies {
+	implementation("com.mageddo:graal-reflection-configuration:2.0.0")
+	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
+	implementation("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+	testImplementation("junit:junit:4.12")
+}
+
+graal {
+	mainClass mainClassName
+	graalVersion(graalVMVersion)
+	outputName(project.name)
+//	option("-H:IncludeResources=lib/.*")
+	option("--allow-incomplete-classpath")
+	option("-H:+AllowVMInspection")
+	option("-H:+ReportUnsupportedElementsAtRuntime")
+	option("-H:EnableURLProtocols=http")
+	option("-Dfile.encoding=UTF-8")
+	option("--no-server")
+}
