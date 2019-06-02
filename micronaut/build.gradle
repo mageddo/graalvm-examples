@@ -46,6 +46,7 @@ graal {
 	option("-H:EnableURLProtocols=http")
 	option("-Dfile.encoding=UTF-8")
 	option("--no-server")
+	option("-J-Xmx5G")
 }
 
 dependencies {
