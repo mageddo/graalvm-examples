@@ -15,12 +15,17 @@ public class Application {
 
 	public static void main(String[] args) throws Exception {
 		LOG.info("starting up ....");
+		curl("http://acme.com");
+		curl("https://google.com");
+	}
+
+	public static void curl(String url){
 		String res = RestEasy
 			.newClient(1)
 			.target("http://acme.com")
 			.request()
 			.get(String.class)
-		;
-		System.out.println(res);
+			;
+		System.out.printf("> %s%n%150s%n...%n%n", url, res);
 	}
 }
