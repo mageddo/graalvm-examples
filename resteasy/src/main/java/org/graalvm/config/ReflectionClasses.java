@@ -1,7 +1,6 @@
 package org.graalvm.config;
 
 import com.oracle.svm.core.annotate.AutomaticFeature;
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.LogFactoryImpl;
 import org.apache.commons.logging.impl.NoOpLog;
@@ -14,7 +13,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,11 +41,11 @@ class ReflectionClasses implements Feature {
 			LogFactory.class,
 			LogFactoryImpl.class,
 			SimpleLog.class,
-			NoOpLog.class,
-//			org.apache.commons.logging.impl.Log4JLogger.class,
 			String.class,
 			Thread.class,
 			SSLContext.class,
+			org.jboss.resteasy.client.jaxrs.i18n.LogMessages_$logger.class,
+			org.jboss.resteasy.resteasy_jaxrs.i18n.LogMessages_$logger.class
 		};
 	}
 
