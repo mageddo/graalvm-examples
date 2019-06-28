@@ -2,8 +2,8 @@ package com.mageddo.sqlite;
 
 import com.oracle.svm.core.annotate.AutomaticFeature;
 import com.oracle.svm.hosted.jni.JNIRuntimeAccess;
-import org.graalvm.nativeimage.Feature;
-import org.graalvm.nativeimage.RuntimeReflection;
+import org.graalvm.nativeimage.hosted.Feature;
+import org.graalvm.nativeimage.hosted.RuntimeReflection;
 import org.sqlite.BusyHandler;
 import org.sqlite.Function;
 import org.sqlite.ProgressHandler;
@@ -11,14 +11,24 @@ import org.sqlite.core.NativeDB;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.sql.Statement;
 import java.util.Arrays;
 
 @AutomaticFeature
 class JNIReflectionClasses implements Feature {
 
 	@Override
+	public void duringSetup(DuringSetupAccess access) {
+		System.load("/tmp/libsqlitejdbc.so");
+	}
+
+	@Override
 	public void beforeAnalysis(BeforeAnalysisAccess access) {
+		try {
+			JNIRuntimeAccess.register(NativeDB.class.getDeclaredMethod("_open_utf8", byte[].class, int.class));
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
 		setupClasses();
 	}
 

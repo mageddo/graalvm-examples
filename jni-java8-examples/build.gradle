@@ -23,6 +23,7 @@ compileJava.doFirst {
 
 
 dependencies {
+	implementation("commons-io:commons-io:2.6")
 	implementation("com.mageddo:graal-reflection-configuration:2.0.0")
 	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
 	implementation("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
@@ -33,7 +34,7 @@ graal {
 	mainClass mainClassName
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-//	option("-H:IncludeResources=lib/.*")
+	option("-H:IncludeResources=lib/.*")
 	option("--allow-incomplete-classpath")
 	option("-H:+AllowVMInspection")
 	option("-H:+ReportUnsupportedElementsAtRuntime")

@@ -13,13 +13,11 @@ public class App {
 
 	public static void main(String[] args) throws Throwable {
 
-		System.load("/data/Downloads/sqlite-jdbc-3.27.2.1/org/sqlite/native/Linux/x86_64/libsqlitejdbc.so");
-
 //		native synchronized void _open_utf8(byte[] fileUtf8, int openFlags) throws SQLException;
-		Method openMethod = NativeDB.class.getDeclaredMethod("_open_utf8", byte[].class, int.class);
-		openMethod.setAccessible(true);
-		NativeDB nativeDB = new NativeDB("", "", null);
-		openMethod.invoke(nativeDB, new byte[256], 5);
+//		Method openMethod = NativeDB.class.getDeclaredMethod("_open_utf8", byte[].class, int.class);
+//		openMethod.setAccessible(true);
+//		NativeDB nativeDB = new NativeDB("", "", null);
+//		openMethod.invoke(nativeDB, new byte[256], 5);
 
 		Class.forName("org.sqlite.JDBC");
 		final DataSource dc = createDatasource();

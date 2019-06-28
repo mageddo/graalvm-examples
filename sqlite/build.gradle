@@ -25,9 +25,16 @@ mainClassName = "com.mageddo.sqlite.App"
 graal {
 	mainClass mainClassName
 	graalVersion(graalVMVersion)
+	downloadBaseUrl("https://github.com/oracle/graal/releases/download/vm-19.0.2/graalvm-ce-linux-amd64-19.0.2.tar.gz#")
 	outputName(project.name)
 	option("-H:IncludeResources=db/.*|static/.*|templates/.*|.*.yml|.*.xml|.*/org/sqlite/.*|org/sqlite/.*")
 	option("--allow-incomplete-classpath")
+	option("--initialize-at-build-time=org.sqlite.JDBC")
+	option("--initialize-at-build-time=org.sqlite.core.DB\$ProgressObserver")
+	option("--initialize-at-build-time=org.sqlite.core.DB")
+	option("--initialize-at-build-time=org.sqlite.core.NativeDB")
+	option("--initialize-at-build-time=org.sqlite.ProgressHandler")
+	option("--initialize-at-build-time=org.sqlite.Function")
 	option("-H:+AllowVMInspection")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-H:EnableURLProtocols=http")

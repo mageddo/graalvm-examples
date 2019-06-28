@@ -1,8 +1,8 @@
 package com.mageddo.sqlite;
 
 import com.oracle.svm.core.annotate.AutomaticFeature;
-import org.graalvm.nativeimage.Feature;
-import org.graalvm.nativeimage.RuntimeReflection;
+import org.graalvm.nativeimage.hosted.Feature;
+import org.graalvm.nativeimage.hosted.RuntimeReflection;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

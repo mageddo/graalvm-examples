@@ -1,3 +1,10 @@
+import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class Sample1 {
 
 	// --- Native methods
@@ -11,9 +18,15 @@ public class Sample1 {
 
 
 	// --- Main method to test our native library
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
-		System.load(Sample1.class.getResource("/lib/Sample1.so").getPath());
+		Path tmpFile = Files.createTempFile("Sample1", ".so");
+		tmpFile.toFile().deleteOnExit();
+		InputStream sourceLib = Sample1.class.getResourceAsStream("lib/Sample1.so");
+		System.out.printf("sourceLib=%s%n", sourceLib);
+		IOUtils.copy(sourceLib, Files.newOutputStream(tmpFile));
+		System.load(tmpFile.toString());
+
 		Sample1 sample = new Sample1();
 		int square = sample.intMethod(5);
 		boolean bool = sample.booleanMethod(true);
