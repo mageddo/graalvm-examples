@@ -1,12 +1,14 @@
 package org.graalvm.config;
 
 import com.oracle.svm.core.annotate.AutomaticFeature;
+import com.oracle.svm.hosted.jni.JNIRuntimeAccess;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.LogFactoryImpl;
 import org.apache.commons.logging.impl.NoOpLog;
 import org.apache.commons.logging.impl.SimpleLog;
 import org.graalvm.nativeimage.hosted.Feature;
 import org.graalvm.nativeimage.hosted.RuntimeReflection;
+import sun.security.ec.ECKeyPairGenerator;
 
 import javax.net.ssl.SSLContext;
 import java.lang.reflect.Constructor;
@@ -18,6 +20,11 @@ import java.util.stream.Stream;
 
 @AutomaticFeature
 class ReflectionClasses implements Feature {
+
+	@Override
+	public void duringSetup(DuringSetupAccess access) {
+		System.loadLibrary("sunec");
+	}
 
 	@Override
 	public void beforeAnalysis(BeforeAnalysisAccess access) {
@@ -45,7 +52,7 @@ class ReflectionClasses implements Feature {
 			Thread.class,
 			SSLContext.class,
 			org.jboss.resteasy.client.jaxrs.i18n.LogMessages_$logger.class,
-			org.jboss.resteasy.resteasy_jaxrs.i18n.LogMessages_$logger.class
+			org.jboss.resteasy.resteasy_jaxrs.i18n.LogMessages_$logger.class,
 		};
 	}
 
