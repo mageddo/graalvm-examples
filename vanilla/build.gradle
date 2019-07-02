@@ -67,4 +67,16 @@ dependencies {
 
 }
 
+task fatJar(type: Jar) {
+	baseName = project.name + '-all'
+	manifest {
+		attributes (
+			'Main-Class': className,
+			'Class-Path': configurations.compile.collect { "lib/${it.name}" }.join(' ')
+		)
+	}
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}
+
 nativeImage.dependsOn(tasks.reflectConfigFiles)
