@@ -69,47 +69,4 @@ dependencies {
 
 }
 
-task copyStatics() {
-	doLast {
-
-		def binFilePath = Paths.get("${project.buildDir}/graal/")
-		def distPath = Paths.get("${binFilePath}/dist")
-
-		deleteRecursively(distPath)
-
-		/**
-		 * Copying required libs
-		 */
-
-		"${System.getProperty("sun.boot.library.path")}:${System.getProperty("java.library.path")}".split(":").each{
-			def libSourcePath = Paths.get(it, "libsunec.so")
-			if(Files.exists(libSourcePath)){
-				Files.copy(libSourcePath, binFilePath.resolve(libSourcePath.fileName), StandardCopyOption.REPLACE_EXISTING)
-			}
-		}
-
-		/**
-		 * Create a distribution file
-		 */
-		ant.zip(destfile: "${distPath}/${project.name}.zip"){
-			zipfileset("dir": "${binFilePath}")
-		}
-	}
-}
-
-static void deleteRecursively(java.nio.file.Path distPath) {
-	Files.createDirectories(distPath)
-	Files.walk(distPath)
-		.sorted(Comparator.reverseOrder())
-		.forEach({
-			try {
-				Files.deleteIfExists(it)
-			} catch (IOException e) {
-				throw new UncheckedIOException(e)
-			}
-		})
-}
-
-
 nativeImage.dependsOn(tasks.reflectConfigFiles)
-nativeImage.finalizedBy(tasks.copyStatics)
