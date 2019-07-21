@@ -1,3 +1,7 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
+
 buildscript {
 	repositories {
 		mavenLocal()
@@ -36,11 +40,16 @@ graal {
 	downloadBaseUrl("https://github.com/oracle/graal/releases/download/vm-19.0.2/graalvm-ce-linux-amd64-19.0.2.tar.gz#")
 	option("-H:IncludeResources=.*.xml|.*.properties")
 	option("--allow-incomplete-classpath")
+	option("-H:+AddAllCharsets")
 	option("-H:ReflectionConfigurationFiles=build/reflect.json")
 	option("-H:+AllowVMInspection")
+	option("-H:+ReportExceptionStackTraces")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-H:EnableURLProtocols=http,https")
 	option("--enable-all-security-services")
+	option("--enable-http")
+	option("--enable-https")
+	option("--initialize-at-build-time=org.graalvm.config.NopLogHandler")
 	option("-Dfile.encoding=UTF-8")
 	option("--no-server")
 	option("-J-Xmx5G")
@@ -49,8 +58,7 @@ graal {
 dependencies {
 
 	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-	compile group: 'com.squareup.moshi', name: 'moshi', version: '1.8.0'
-	compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.0.1'
+	compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.2'
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
 
 //	tag::graal[]
@@ -61,4 +69,47 @@ dependencies {
 
 }
 
+task copyStatics() {
+	doLast {
+
+		def binFilePath = Paths.get("${project.buildDir}/graal/")
+		def distPath = Paths.get("${binFilePath}/dist")
+
+		deleteRecursively(distPath)
+
+		/**
+		 * Copying required libs
+		 */
+
+		"${System.getProperty("sun.boot.library.path")}:${System.getProperty("java.library.path")}".split(":").each{
+			def libSourcePath = Paths.get(it, "libsunec.so")
+			if(Files.exists(libSourcePath)){
+				Files.copy(libSourcePath, binFilePath.resolve(libSourcePath.fileName), StandardCopyOption.REPLACE_EXISTING)
+			}
+		}
+
+		/**
+		 * Create a distribution file
+		 */
+		ant.zip(destfile: "${distPath}/${project.name}.zip"){
+			zipfileset("dir": "${binFilePath}")
+		}
+	}
+}
+
+static void deleteRecursively(java.nio.file.Path distPath) {
+	Files.createDirectories(distPath)
+	Files.walk(distPath)
+		.sorted(Comparator.reverseOrder())
+		.forEach({
+			try {
+				Files.deleteIfExists(it)
+			} catch (IOException e) {
+				throw new UncheckedIOException(e)
+			}
+		})
+}
+
+
 nativeImage.dependsOn(tasks.reflectConfigFiles)
+nativeImage.finalizedBy(tasks.copyStatics)

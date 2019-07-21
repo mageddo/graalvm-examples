@@ -7,9 +7,9 @@ public class Application {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		LOG.info("starting up ....");
-		System.out.println(new OkHttpContributors().findContributors());
+		System.out.println(OkHttpContributors.PARSER.writeValueAsString(new OkHttpContributors().findContributors()));
 	}
 
 }

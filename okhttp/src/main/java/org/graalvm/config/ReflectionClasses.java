@@ -1,14 +1,16 @@
 package org.graalvm.config;
 
+import com.fasterxml.jackson.databind.ext.Java7SupportImpl;
 import com.oracle.svm.core.annotate.AutomaticFeature;
+import org.graalvm.nativeimage.ImageSingletons;
+import org.graalvm.nativeimage.LogHandler;
 import org.graalvm.nativeimage.hosted.Feature;
 import org.graalvm.nativeimage.hosted.RuntimeReflection;
 
-import javax.net.ssl.SSLContext;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +19,9 @@ class ReflectionClasses implements Feature {
 
 	@Override
 	public void duringSetup(DuringSetupAccess access) {
+		System.out.println("java.library.path=" + System.getProperty("java.library.path"));
 		System.loadLibrary("sunec");
+		ImageSingletons.add(LogHandler.class, new NopLogHandler());
 	}
 
 	@Override
@@ -38,10 +42,8 @@ class ReflectionClasses implements Feature {
 	 */
 	static Class<?>[] getClasses(){
 		return new Class[]{
-			Statement[].class,
-			String.class,
-			Thread.class,
-			SSLContext.class,
+			ArrayList.class,
+			Java7SupportImpl.class
 		};
 	}
 
@@ -54,10 +56,13 @@ class ReflectionClasses implements Feature {
 			for (final Class<?> clazz : getClasses()) {
 				process(clazz);
 			}
+
 		} catch (Error e){
 			if(!e.getMessage().contains("The class ImageSingletons can only be used when building native images")){
 				throw e;
 			}
+		} catch (Exception e ){
+			e.printStackTrace();
 		}
 	}
 
@@ -65,19 +70,15 @@ class ReflectionClasses implements Feature {
 	 * Register all constructors and methods on graalvm to reflection support at runtime
 	 */
 	private static void process(Class<?> clazz) {
-		try {
-			System.out.println("> Declaring class: " + clazz.getCanonicalName());
-			RuntimeReflection.register(clazz);
-			for (final Method method : clazz.getMethods()) {
-				System.out.println("\t> method: " + toSignature(method));
-				RuntimeReflection.register(method);
-			}
-			for (final Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-				System.out.println("\t> constructor: " + toSignature(constructor));
-				RuntimeReflection.register(constructor);
-			}
-		} catch (Exception e){
-			e.printStackTrace();
+		System.out.println("> Declaring class: " + clazz.getCanonicalName());
+		RuntimeReflection.register(clazz);
+		for (final Method method : clazz.getMethods()) {
+			System.out.println("\t> method: " + toSignature(method));
+			RuntimeReflection.register(method);
+		}
+		for (final Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+			System.out.println("\t> constructor: " + toSignature(constructor));
+			RuntimeReflection.register(constructor);
 		}
 	}
 
@@ -91,5 +92,6 @@ class ReflectionClasses implements Feature {
 			"%s(%s)", executable.getName(), parameters.substring(1, parameters.length() - 1)
 		);
 	}
+
 }
 
