@@ -9,7 +9,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -28,7 +27,6 @@ public class OkHttpContributors {
 	public OkHttpContributors() {
 		this.baseURI = "https://api.github.com";
 	}
-
 
 	public List<Contributor> findContributors() {
 
