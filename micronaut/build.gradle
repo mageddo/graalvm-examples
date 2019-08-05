@@ -5,14 +5,16 @@ buildscript {
 }
 plugins {
 	id "java"
-	id "com.palantir.graal" version "0.3.0-2-g6c49b4d"
-	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.1"
+	id "com.palantir.graal" version "0.4.0"
+	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.2"
 }
 
 repositories {
 	mavenLocal()
 	mavenCentral()
 	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+	maven { url "https://dl.bintray.com/micronaut/core-releases-local" }
+	maven { url = 'https://oss.sonatype.org/service/local/repositories/releases/content' }
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -38,10 +40,12 @@ graal {
 	option("-H:IncludeResources=static/.*|templates/.*|.*.yml|.*.xml|META-INF/http/.*")
 	option("-H:IncludeResources=application.properties")
 	option("--allow-incomplete-classpath")
-	option("-H:ReflectionConfigurationFiles=build/reflect.json,graal/micronaut.json")
+	option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json,graal/micronaut.json")
 	option("-H:+AllowVMInspection")
-	option("--rerun-class-initialization-at-runtime=sun.security.jca.JCAUtil\$CachedSecureRandomHolder,javax.net.ssl.SSLContext")
-	option("--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
+	option("--initialize-at-run-time=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
+	option("--initialize-at-build-time=org.postgresql.Driver")
+	option("--initialize-at-build-time=org.postgresql.util.SharedTimer")
+	option("--no-fallback")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-H:EnableURLProtocols=http")
 	option("-Dfile.encoding=UTF-8")
@@ -53,8 +57,6 @@ dependencies {
 
 	compile 'com.zaxxer:HikariCP:3.3.1'
 	compile ("org.postgresql:postgresql:42.2.5")
-	compile group: 'net.java.dev.jna', name: 'jna', version: '5.2.0'
-	compile group: 'net.java.dev.jna', name: 'jna-platform', version: '5.2.0'
 
 	compile ("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	compile ("io.micronaut:micronaut-spring:${micronautVersion}")
@@ -70,10 +72,10 @@ dependencies {
 	compileOnly "io.micronaut:micronaut-inject-java:${micronautVersion}"
 	testCompile "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
-	compile ("io.micronaut:micronaut-views:${micronautVersion}")
-	runtime ('org.thymeleaf:thymeleaf:3.0.11.RELEASE')
+	compile ("io.micronaut:micronaut-views-thymeleaf:1.2.0")
 
 	compile('com.mageddo:rsl:1.0.0')
+	compile("com.mageddo:commons:1.5.0")
 	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
@@ -83,9 +85,6 @@ dependencies {
 	runtime("io.micronaut:micronaut-graal:${micronautVersion}")
 	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
 	//end::graal[]
-
-	runtime "ch.qos.logback:logback-classic:1.2.3"
-	implementation ("org.aspectj:aspectjrt:1.9.2")
 
 	testCompile "junit:junit:4.12"
 

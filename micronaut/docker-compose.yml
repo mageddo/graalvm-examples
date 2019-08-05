@@ -11,9 +11,3 @@ services:
       - 5433:5432
     volumes:
       - ./initdb.d:/docker-entrypoint-initdb.d
-
-  native-image:
-    image: defreitas/micronaut-native-image:latest
-    build:
-      context: .
-      dockerfile: src/main/docker/nativeimage/Dockerfile
