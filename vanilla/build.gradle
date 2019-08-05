@@ -38,7 +38,7 @@ graal {
 	outputName(project.name)
 	option("-H:IncludeResources=.*.yml")
 	option("--allow-incomplete-classpath")
-	option("-H:ReflectionConfigurationFiles=build/reflect.json")
+	option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json")
 	option("-H:+AllowVMInspection")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-H:EnableURLProtocols=http,https")
@@ -50,20 +50,8 @@ graal {
 
 dependencies {
 
-	compile('com.mageddo:rsl:1.0.0')
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
-
-	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
-	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
-
-//	tag::graal[]
-	compile ("com.mageddo:graal-reflection-configuration:2.0.0")
-	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
-	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
-	//end::graal[]
-
 	compile "ch.qos.logback:logback-classic:1.2.3"
-
 	testCompile "junit:junit:4.12"
 
 }
