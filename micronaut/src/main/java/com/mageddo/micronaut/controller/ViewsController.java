@@ -20,7 +20,7 @@ public class ViewsController {
 
 	@Get("/modelAndView")
 	ModelAndView modelAndView() {
-		return new ModelAndView(
+		return new ModelAndView<>(
 			"home",  mapOf("name", "Elvis")
 		);
 	}

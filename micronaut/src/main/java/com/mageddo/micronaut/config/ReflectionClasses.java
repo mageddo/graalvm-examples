@@ -1,9 +1,7 @@
 package com.mageddo.micronaut.config;
 
-import com.mageddo.bookmarks.utils.ThymeleafUtils;
 import com.mageddo.common.graalvm.SubstrateVM;
 import com.oracle.svm.core.annotate.AutomaticFeature;
-import org.flywaydb.core.internal.logging.javautil.JavaUtilLogCreator;
 import org.graalvm.nativeimage.hosted.Feature;
 import org.springframework.transaction.TransactionDefinition;
 import org.thymeleaf.standard.expression.AdditionExpression;
@@ -23,18 +21,11 @@ class ReflectionClasses implements Feature {
 	@Override
 	public void beforeAnalysis(BeforeAnalysisAccess access) {
 
-		// hikari datasource
+		// jdbc support
 		SubstrateVM
 			.builder()
 			.constructors()
 			.clazz(Statement[].class)
-			.build();
-
-		// flyway migration
-		SubstrateVM
-			.builder()
-			.constructors()
-			.clazz(JavaUtilLogCreator.class)
 			.build();
 
 		SubstrateVM
