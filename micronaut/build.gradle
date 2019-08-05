@@ -74,8 +74,10 @@ dependencies {
 
 	compile ("io.micronaut:micronaut-views-thymeleaf:1.2.0")
 
-	compile('com.mageddo:rsl:1.0.0')
+	compile("com.mageddo:rsl:1.0.0")
 	compile("com.mageddo:commons:1.5.0")
+	compile ("ch.qos.logback:logback-classic:1.2.3")
+
 	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
