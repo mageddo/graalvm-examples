@@ -35,6 +35,8 @@ graal {
 	option("--initialize-at-build-time=org.sqlite.core.NativeDB")
 	option("--initialize-at-build-time=org.sqlite.ProgressHandler")
 	option("--initialize-at-build-time=org.sqlite.Function")
+	option("--initialize-at-build-time=org.sqlite.Function\$Aggregate")
+	option("--initialize-at-build-time=org.sqlite.Function\$Window")	
 	option("-H:+AllowVMInspection")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-H:EnableURLProtocols=http")
