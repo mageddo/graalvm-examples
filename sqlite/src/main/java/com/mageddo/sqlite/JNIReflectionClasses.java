@@ -11,6 +11,7 @@ import org.sqlite.core.NativeDB;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 
 @AutomaticFeature
@@ -45,10 +46,16 @@ class JNIReflectionClasses implements Feature {
 	 */
 	static Class<?>[] getClasses(){
 		return new Class[]{
+			org.sqlite.core.DB.class,
 			NativeDB.class,
 			BusyHandler.class,
 			Function.class,
-			ProgressHandler.class
+			ProgressHandler.class,
+			Function.Aggregate.class,
+			Function.Window.class,
+			org.sqlite.core.DB.ProgressObserver.class,			
+			java.lang.Throwable.class,
+			boolean[].class
 		};
 	}
 
@@ -79,6 +86,11 @@ class JNIReflectionClasses implements Feature {
 				System.out.println("\t> method: " + method.getName() + "(" + Arrays.toString(method.getParameterTypes()) + ")");
 				JNIRuntimeAccess.register(method);
 				RuntimeReflection.register(method);
+			}
+			for (final Field field : clazz.getDeclaredFields()) {
+				System.out.println("\t> field: " + field.getName());
+				JNIRuntimeAccess.register(field);
+				RuntimeReflection.register(field);
 			}
 			for (final Constructor<?> constructor : clazz.getDeclaredConstructors()) {
 				System.out.println("\t> constructor: " + constructor.getName() + "(" + constructor.getParameterCount() + ")");
