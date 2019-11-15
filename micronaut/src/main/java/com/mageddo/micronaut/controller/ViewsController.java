@@ -15,7 +15,7 @@ public class ViewsController {
 	@Get
 	@View("home")
 	public HttpResponse index() {
-		return ok(mapOf("loggedIn", true, "username", "sdelamo"));
+		return ok(mapOf("loggedIn", true, "username", "Johnny Cash"));
 	}
 
 	@Get("/modelAndView")
