@@ -18,20 +18,17 @@ public class JdbcTemplateFactory {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Bean
 	@Singleton
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
 	}
 
-	@Bean
 	@Singleton
 	public NamedParameterJdbcTemplate namedJdbcTemplate(DataSource dataSource) {
 		logger.info("datasource={}", dataSource);
 		return new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	@Bean
 	@Singleton
 	public DataSourceTransactionManager DataSourceTransactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);

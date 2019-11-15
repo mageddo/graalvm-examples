@@ -8,7 +8,6 @@ import io.micronaut.http.HttpStatus;
 import io.micronaut.runtime.server.EmbeddedServer;
 import io.micronaut.test.annotation.MicronautTest;
 import io.zonky.test.db.postgres.junit.EmbeddedPostgresRules;
-import io.zonky.test.db.postgres.junit5.EmbeddedPostgresExtension;
 import io.zonky.test.db.postgres.junit5.SingleInstancePostgresExtension;
 import lombok.var;
 import org.apache.commons.lang3.StringUtils;
@@ -31,10 +30,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 class FruitsControllerTest {
 
 	@RegisterExtension
-	public static final SingleInstancePostgresExtension postgres = EmbeddedPostgresExtension.singleInstance()
-		.customize(customizer -> {
-			customizer.setPort(5431);
-		});
+	public static final SingleInstancePostgresExtension postgres = EmbeddedPostgresExtension.instance();
 
 	@Inject
 	private EmbeddedServer embeddedServer;
