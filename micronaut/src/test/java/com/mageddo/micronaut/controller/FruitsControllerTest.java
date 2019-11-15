@@ -33,7 +33,7 @@ class FruitsControllerTest {
 	@RegisterExtension
 	public static final SingleInstancePostgresExtension postgres = EmbeddedPostgresExtension.singleInstance()
 		.customize(customizer -> {
-			customizer.setPort(5433);
+			customizer.setPort(5431);
 		});
 
 	@Inject
