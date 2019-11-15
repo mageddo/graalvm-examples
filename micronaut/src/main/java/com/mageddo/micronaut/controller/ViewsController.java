@@ -9,7 +9,7 @@ import io.micronaut.views.View;
 import static io.micronaut.core.util.CollectionUtils.mapOf;
 import static io.micronaut.http.HttpResponse.ok;
 
-@Controller("/views")
+@Controller("/")
 public class ViewsController {
 
 	@Get

@@ -37,7 +37,7 @@ graal {
 	mainClass className
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-	option("-H:IncludeResources=static/.*|templates/.*|.*.yml|.*.xml|META-INF/http/.*")
+	option("-H:IncludeResources=static/.*|templates/.*|.*.properties|.*.xml|META-INF/http/.*")
 	option("-H:IncludeResources=application.properties")
 	option("--allow-incomplete-classpath")
 	option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json,graal/micronaut.json")
@@ -47,6 +47,7 @@ graal {
 	option("--initialize-at-build-time=org.postgresql.util.SharedTimer")
 	option("--no-fallback")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
+	option("-H:+TraceClassInitialization")
 	option("-H:EnableURLProtocols=http")
 	option("-Dfile.encoding=UTF-8")
 	option("--no-server")
@@ -70,19 +71,15 @@ dependencies {
 	compile "io.micronaut:micronaut-http-client:${micronautVersion}"
 	compile "io.micronaut:micronaut-http-server-netty:${micronautVersion}"
 	compile "io.micronaut:micronaut-runtime:${micronautVersion}"
-	compile "io.micronaut.configuration:micronaut-flyway:1.1.0"
 
-	compile "io.micronaut:micronaut-inject:${micronautVersion}"
-	annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 	compileOnly "io.micronaut:micronaut-inject-java:${micronautVersion}"
-	testCompile "io.micronaut:micronaut-inject-java:${micronautVersion}"
-
+	annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
+	compile "io.micronaut:micronaut-inject:${micronautVersion}"
 	compile ("io.micronaut:micronaut-views-thymeleaf:1.2.0")
 
 	compile("com.mageddo:rsl:1.0.0")
 	compile("com.mageddo:commons:1.5.0")
 	compile ("ch.qos.logback:logback-classic:1.2.3")
-
 
 //	tag::graal[]
 	compile ("com.mageddo:graal-reflection-configuration:2.0.0")
@@ -91,11 +88,6 @@ dependencies {
 	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
 	//end::graal[]
 
-	testCompile "io.rest-assured:rest-assured:4.1.2"
-	testCompile "io.micronaut.test:micronaut-test-junit5:1.1.2"
-	testCompile "org.junit.jupiter:junit-jupiter:5.4.2"
-	testCompile "org.mockito:mockito-junit-jupiter:3.1.0"
-
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
 
@@ -103,6 +95,11 @@ dependencies {
 	testCompile "io.micronaut:micronaut-inject-java:${micronautVersion}"
 	testAnnotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
+	testCompile "org.junit.jupiter:junit-jupiter:5.4.2"
+	testCompile "org.mockito:mockito-junit-jupiter:3.1.0"
+	testCompile "io.rest-assured:rest-assured:4.1.2"
+	testCompile "io.micronaut.test:micronaut-test-junit5:1.1.2"
+	testCompile "io.micronaut.configuration:micronaut-flyway:1.1.0"
 	testCompile "io.zonky.test:embedded-postgres:1.2.5"
 	testCompile 'io.zonky.test.postgres:embedded-postgres-binaries-bom:11.6.0'
 

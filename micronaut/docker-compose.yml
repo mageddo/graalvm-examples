@@ -10,4 +10,4 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - ./initdb.d:/docker-entrypoint-initdb.d
+      - ./src/main/resources/db/migrations:/docker-entrypoint-initdb.d
