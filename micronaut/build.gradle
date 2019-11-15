@@ -55,6 +55,10 @@ graal {
 
 dependencies {
 
+	compileOnly 'org.projectlombok:lombok:1.18.10'
+	annotationProcessor 'org.projectlombok:lombok:1.18.10'
+	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
+
 	compile 'com.zaxxer:HikariCP:3.3.1'
 	compile ("org.postgresql:postgresql:42.2.5")
 
@@ -66,6 +70,7 @@ dependencies {
 	compile "io.micronaut:micronaut-http-client:${micronautVersion}"
 	compile "io.micronaut:micronaut-http-server-netty:${micronautVersion}"
 	compile "io.micronaut:micronaut-runtime:${micronautVersion}"
+	compile "io.micronaut.configuration:micronaut-flyway:1.1.0"
 
 	compile "io.micronaut:micronaut-inject:${micronautVersion}"
 	annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
@@ -78,8 +83,6 @@ dependencies {
 	compile("com.mageddo:commons:1.5.0")
 	compile ("ch.qos.logback:logback-classic:1.2.3")
 
-	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
-	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
 //	tag::graal[]
 	compile ("com.mageddo:graal-reflection-configuration:2.0.0")
@@ -88,8 +91,25 @@ dependencies {
 	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
 	//end::graal[]
 
-	testCompile "junit:junit:4.12"
+	testCompile "io.rest-assured:rest-assured:4.1.2"
+	testCompile "io.micronaut.test:micronaut-test-junit5:1.1.2"
+	testCompile "org.junit.jupiter:junit-jupiter:5.4.2"
+	testCompile "org.mockito:mockito-junit-jupiter:3.1.0"
 
+	testCompileOnly 'org.projectlombok:lombok:1.18.10'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
+	testCompile "io.micronaut:micronaut-inject-java:${micronautVersion}"
+	testAnnotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
+
+	testCompile "io.zonky.test:embedded-postgres:1.2.5"
+	testCompile 'io.zonky.test.postgres:embedded-postgres-binaries-bom:11.6.0'
+
+}
+
+test {
+	useJUnitPlatform()
 }
 
 nativeImage.dependsOn(tasks.reflectConfigFiles)

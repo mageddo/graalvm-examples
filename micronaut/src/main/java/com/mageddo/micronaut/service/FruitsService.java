@@ -24,7 +24,7 @@ public class FruitsService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<FruitEntity> getFruits()  {
 		fruitsDAO.traceSelect();
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 4; i++) {
 			logger.info("sleeping, second={}", i);
 			sleep();
 		}
