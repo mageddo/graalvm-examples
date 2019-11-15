@@ -1,13 +1,12 @@
 package com.mageddo.micronaut.config;
 
 import io.micronaut.context.ApplicationContext;
+import lombok.experimental.UtilityClass;
 
-public final class ApplicationContextUtils {
+@UtilityClass
+public class ApplicationContextUtils {
 
 	private static ApplicationContext context;
-
-	private ApplicationContextUtils() {
-	}
 
 	public static ApplicationContext context(){
 		return context;
