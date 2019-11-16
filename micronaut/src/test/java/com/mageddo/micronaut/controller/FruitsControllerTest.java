@@ -3,21 +3,13 @@ package com.mageddo.micronaut.controller;
 import com.mageddo.rawstringliterals.RawString;
 import com.mageddo.rawstringliterals.RawStrings;
 import com.mageddo.rawstringliterals.Rsl;
-import com.mageddo.tests.EmbeddedPostgresExtension;
-import com.mageddo.tests.RestAssuredExtension;
 import io.micronaut.http.HttpStatus;
-import io.micronaut.runtime.server.EmbeddedServer;
 import io.micronaut.test.annotation.MicronautTest;
-import io.zonky.test.db.postgres.junit5.SingleInstancePostgresExtension;
 import lombok.var;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.extension.RegisterExtension;
-
-import javax.inject.Inject;
 
 import static io.restassured.RestAssured.get;
 import static org.hamcrest.CoreMatchers.equalTo;
