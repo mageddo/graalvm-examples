@@ -1,7 +1,6 @@
 package com.mageddo.tests;
 
 import io.micronaut.context.ApplicationContext;
-import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.runtime.event.ApplicationStartupEvent;
 import io.micronaut.runtime.event.annotation.EventListener;
@@ -16,7 +15,7 @@ public class MicronautFactory {
 
 	private static ApplicationContext context;
 
-	@Context
+//	@Context
 	@SneakyThrows
 	public SingleInstancePostgresExtension setupEmbeddedDatabase() {
 		final SingleInstancePostgresExtension extension = EmbeddedPostgresExtension
