@@ -24,7 +24,21 @@ class FruitsServiceTest {
 	private DatabaseConfigurator databaseConfigurator;
 
 	@Test
-	void mustReturn5Fruits(){
+	void mustFind2FruitsTraces(){
+
+		// arrange
+		databaseConfigurator.execute("/fruits-service-test/001.sql");
+
+		// act
+		final List fruits = databaseConfigurator.getJdbcTemplate().queryForList("SELECT * FROM FRUITS_TRACE", mapOf());
+
+		// assert
+		assertEquals(2, fruits.size());
+
+	}
+
+	@Test
+	void mustFind2FruitsTracesAgainBecauseOfDatabaseConfiguratorExtension(){
 
 		// arrange
 		databaseConfigurator.execute("/fruits-service-test/001.sql");
