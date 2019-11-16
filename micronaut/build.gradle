@@ -63,11 +63,11 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
-	compile 'com.zaxxer:HikariCP:3.3.1'
 	compile ("org.postgresql:postgresql:42.2.5")
 
 	compile ("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	compile ("io.micronaut:micronaut-spring:${micronautVersion}")
+	compile ("io.micronaut.configuration:micronaut-jdbc-hikari:1.2.3")
 
 	annotationProcessor "io.micronaut:micronaut-validation:${micronautVersion}"
 	compile "io.micronaut:micronaut-validation:${micronautVersion}"
