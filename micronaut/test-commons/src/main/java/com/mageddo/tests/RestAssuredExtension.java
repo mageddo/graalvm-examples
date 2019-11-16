@@ -1,4 +1,4 @@
-package com.mageddo.micronaut.controller;
+package com.mageddo.tests;
 
 import io.micronaut.runtime.server.EmbeddedServer;
 import io.restassured.RestAssured;

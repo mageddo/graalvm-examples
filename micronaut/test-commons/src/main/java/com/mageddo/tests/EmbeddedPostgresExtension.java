@@ -1,4 +1,4 @@
-package com.mageddo.micronaut.controller;
+package com.mageddo.tests;
 
 import io.zonky.test.db.postgres.junit5.SingleInstancePostgresExtension;
 import lombok.experimental.UtilityClass;

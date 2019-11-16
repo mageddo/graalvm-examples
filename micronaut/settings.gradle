@@ -1,1 +1,3 @@
 rootProject.name = 'micronaut'
+
+include ':test-commons'
