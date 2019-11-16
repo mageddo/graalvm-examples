@@ -1,10 +1,9 @@
 package com.mageddo.micronaut.dao;
 
-
 import com.mageddo.micronaut.entity.FruitEntity;
 import com.mageddo.rawstringliterals.RawString;
 import com.mageddo.rawstringliterals.Rsl;
-import io.micronaut.context.ApplicationContextProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -18,15 +17,11 @@ import static com.mageddo.rawstringliterals.RawStrings.lateInit;
 
 @Rsl
 @Singleton
+@RequiredArgsConstructor
 public class FruitsDAOPg implements FruitsDAO {
 
 	private final NamedParameterJdbcTemplate parameterJdbcTemplate;
 	private final DataSource dataSource;
-
-	public FruitsDAOPg(NamedParameterJdbcTemplate parameterJdbcTemplate, DataSource dataSource) {
-		this.parameterJdbcTemplate = parameterJdbcTemplate;
-		this.dataSource = dataSource;
-	}
 
 	@Override
 	public void traceSelect() {
