@@ -48,6 +48,7 @@ graal {
 	option("--initialize-at-run-time=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
 	option("--initialize-at-build-time=org.postgresql.Driver")
 	option("--initialize-at-build-time=org.postgresql.util.SharedTimer")
+	option("--initialize-at-build-time=org.springframework.jdbc.datasource.ConnectionProxy")
 	option("--no-fallback")
 	option("-H:+ReportUnsupportedElementsAtRuntime")
 	option("-H:+TraceClassInitialization")
