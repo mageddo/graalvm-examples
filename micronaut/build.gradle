@@ -38,7 +38,7 @@ task run(type: JavaExec){
 
 graal {
 	mainClass className
-	graalVersion(graalVMVersion)
+	graalVersion(graalVersion)
 	outputName(project.name)
 	option("-H:IncludeResources=static/.*|templates/.*|.*.properties|.*.xml|META-INF/http/.*")
 	option("-H:IncludeResources=application.properties")
@@ -89,8 +89,8 @@ dependencies {
 //	tag::graal[]
 	annotationProcessor "io.micronaut:micronaut-graal:${micronautVersion}"
 	compileOnly("com.mageddo:graal-reflection-configuration:2.0.0")
-	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
-	compile ("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+	compileOnly("com.oracle.substratevm:svm:19.2.1")
+	compile ("org.graalvm.sdk:graal-sdk:${graalVersion}")
 	//end::graal[]
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
