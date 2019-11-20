@@ -59,6 +59,10 @@ graal {
 	option("-J-Xmx5G")
 }
 
+configurations {
+	compile.exclude module: 'spring-jcl'
+}
+
 dependencies {
 
 	compileOnly 'org.projectlombok:lombok:1.18.10'
