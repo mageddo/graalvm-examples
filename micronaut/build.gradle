@@ -59,6 +59,10 @@ graal {
 	option("-J-Xmx5G")
 }
 
+configurations {
+	compile.exclude module: 'spring-jcl'
+}
+
 dependencies {
 
 	compileOnly 'org.projectlombok:lombok:1.18.10'
@@ -92,7 +96,7 @@ dependencies {
 	compileOnly("com.mageddo:graal-reflection-configuration:2.0.0")
 	compileOnly("com.oracle.substratevm:svm:19.2.1")
 	compile ("org.graalvm.sdk:graal-sdk:${graalVmVersion}")
-	compileOnly("org.apache.logging.log4j:log4j-core:2.12.1")
+	//	compileOnly("org.apache.logging.log4j:log4j-core:2.12.1")
 	//end::graal[]
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
