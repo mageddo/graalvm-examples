@@ -6,7 +6,7 @@ buildscript {
 
 plugins {
 	id "java"
-	id "com.palantir.graal" version "0.4.0"
+	id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
 	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.2"
 }
 
@@ -38,7 +38,8 @@ task run(type: JavaExec){
 
 graal {
 	mainClass className
-	graalVersion(graalVersion)
+	graalVersion(graalVmVersion)
+	downloadBaseUrl("https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz#")
 	outputName(project.name)
 	option("-H:IncludeResources=static/.*|templates/.*|.*.properties|.*.xml|META-INF/http/.*")
 	option("-H:IncludeResources=application.properties")
@@ -90,7 +91,7 @@ dependencies {
 	annotationProcessor "io.micronaut:micronaut-graal:${micronautVersion}"
 	compileOnly("com.mageddo:graal-reflection-configuration:2.0.0")
 	compileOnly("com.oracle.substratevm:svm:19.2.1")
-	compile ("org.graalvm.sdk:graal-sdk:${graalVersion}")
+	compile ("org.graalvm.sdk:graal-sdk:${graalVmVersion}")
 	//end::graal[]
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
