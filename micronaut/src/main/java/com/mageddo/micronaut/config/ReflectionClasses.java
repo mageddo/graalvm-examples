@@ -3,12 +3,6 @@ package com.mageddo.micronaut.config;
 import com.mageddo.common.graalvm.SubstrateVM;
 import com.oracle.svm.core.annotate.AutomaticFeature;
 import org.graalvm.nativeimage.hosted.Feature;
-import org.springframework.transaction.TransactionDefinition;
-import org.thymeleaf.standard.expression.AdditionExpression;
-import org.thymeleaf.standard.expression.EqualsExpression;
-import org.thymeleaf.standard.expression.NotEqualsExpression;
-
-import java.sql.Statement;
 
 @AutomaticFeature
 class ReflectionClasses implements Feature {
@@ -25,24 +19,29 @@ class ReflectionClasses implements Feature {
 		SubstrateVM
 			.builder()
 			.constructors()
-			.clazz(Statement[].class)
+			.clazz(java.sql.Statement[].class)
 			.build();
 
 		SubstrateVM
 			.builder()
 			.fields()
-			.clazz(TransactionDefinition.class)
+			.clazz(org.springframework.transaction.TransactionDefinition.class)
 			.build();
 
 		// thymeleaf
 		SubstrateVM
 			.builder()
 			.constructors()
-			.clazz(AdditionExpression.class)
-			.clazz(EqualsExpression.class)
-			.clazz(NotEqualsExpression.class)
+			.clazz(org.thymeleaf.standard.expression.AdditionExpression.class)
+			.clazz(org.thymeleaf.standard.expression.EqualsExpression.class)
+			.clazz(org.thymeleaf.standard.expression.NotEqualsExpression.class)
 			.build();
 
+		// spring logging
+		SubstrateVM
+			.builder()
+			.clazz(org.apache.commons.logging.LogFactory.class)
+			.build();
 	}
 
 }
