@@ -7,7 +7,7 @@ buildscript {
 plugins {
 	id "java"
 	id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
-//	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.2"
+	id "application"
 }
 
 allprojects {
@@ -23,24 +23,27 @@ allprojects {
 	targetCompatibility = JavaVersion.VERSION_11
 }
 
-def className = "com.mageddo.micronaut.Application"
+mainClassName = "com.mageddo.micronaut.Application"
 
 task debug(type: JavaExec){
 	debug = true
 	classpath = sourceSets.main.runtimeClasspath
-	main = className
-}
-
-task run(type: JavaExec){
-	classpath = sourceSets.main.runtimeClasspath
-	main = className
+	main = mainClassName
 }
 
 graal {
-	mainClass className
+	mainClass mainClassName
 	graalVersion(graalVMVersion)
 	outputName(project.name)
 	option("-J-Xmx5G")
+	option("--no-server")
+}
+
+jar {
+	archiveBaseName = "${project.name}-all"
+	into("lib") {
+		from configurations.runtime
+	}
 }
 
 configurations {
