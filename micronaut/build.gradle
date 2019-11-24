@@ -46,9 +46,9 @@ jar {
 	}
 }
 
-configurations {
-	compile.exclude module: 'spring-jcl'
-}
+//configurations {
+//	compile.exclude module: 'spring-jcl'
+//}
 
 dependencies {
 

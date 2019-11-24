@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,10 +16,6 @@
 
 package org.apache.commons.logging;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.spi.ExtendedLogger;
-import org.apache.logging.log4j.spi.LoggerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.spi.LocationAwareLogger;
@@ -28,7 +24,7 @@ import java.io.Serializable;
 import java.util.logging.LogRecord;
 
 /**
- * Spring's common JCL adapter behind {@link LogFactory} and {@link LogFactoryService}.
+ * Spring's common JCL adapter behind.
  * Detects the presence of Log4j 2.x / SLF4J, falling back to {@code java.util.logging}.
  *
  * @author Juergen Hoeller
@@ -36,31 +32,12 @@ import java.util.logging.LogRecord;
  */
 final class LogAdapter {
 
-	private static final String LOG4J_SPI = "org.apache.logging.log4j.spi.ExtendedLogger";
-
-	private static final String LOG4J_SLF4J_PROVIDER = "org.apache.logging.slf4j.SLF4JProvider";
-
 	private static final String SLF4J_SPI = "org.slf4j.spi.LocationAwareLogger";
-
 	private static final String SLF4J_API = "org.slf4j.Logger";
-
-
 	private static final LogApi logApi;
 
 	static {
-		if (isPresent(LOG4J_SPI)) {
-			if (isPresent(LOG4J_SLF4J_PROVIDER) && isPresent(SLF4J_SPI)) {
-				// log4j-to-slf4j bridge -> we'll rather go with the SLF4J SPI;
-				// however, we still prefer Log4j over the plain SLF4J API since
-				// the latter does not have location awareness support.
-				logApi = LogApi.SLF4J_LAL;
-			}
-			else {
-				// Use Log4j 2.x directly, including location awareness support
-				logApi = LogApi.LOG4J;
-			}
-		}
-		else if (isPresent(SLF4J_SPI)) {
+		if (isPresent(SLF4J_SPI)) {
 			// Full SLF4J SPI including location awareness support
 			logApi = LogApi.SLF4J_LAL;
 		}
@@ -85,8 +62,6 @@ final class LogAdapter {
 	 */
 	public static Log createLog(String name) {
 		switch (logApi) {
-			case LOG4J:
-				return Log4jAdapter.createLog(name);
 			case SLF4J_LAL:
 				return Slf4jAdapter.createLocationAwareLog(name);
 			case SLF4J:
@@ -112,17 +87,7 @@ final class LogAdapter {
 		}
 	}
 
-
-	private enum LogApi {LOG4J, SLF4J_LAL, SLF4J, JUL}
-
-
-	private static class Log4jAdapter {
-
-		public static Log createLog(String name) {
-			return new Log4jLog(name);
-		}
-	}
-
+	private enum LogApi {SLF4J_LAL, SLF4J, JUL}
 
 	private static class Slf4jAdapter {
 
@@ -144,129 +109,6 @@ final class LogAdapter {
 			return new JavaUtilLog(name);
 		}
 	}
-
-
-	@SuppressWarnings("serial")
-	private static class Log4jLog implements Log, Serializable {
-
-		private static final String FQCN = Log4jLog.class.getName();
-
-		private static final LoggerContext loggerContext =
-				LogManager.getContext(Log4jLog.class.getClassLoader(), false);
-
-		private final ExtendedLogger logger;
-
-		public Log4jLog(String name) {
-			this.logger = loggerContext.getLogger(name);
-		}
-
-		@Override
-		public boolean isFatalEnabled() {
-			return this.logger.isEnabled(Level.FATAL);
-		}
-
-		@Override
-		public boolean isErrorEnabled() {
-			return this.logger.isEnabled(Level.ERROR);
-		}
-
-		@Override
-		public boolean isWarnEnabled() {
-			return this.logger.isEnabled(Level.WARN);
-		}
-
-		@Override
-		public boolean isInfoEnabled() {
-			return this.logger.isEnabled(Level.INFO);
-		}
-
-		@Override
-		public boolean isDebugEnabled() {
-			return this.logger.isEnabled(Level.DEBUG);
-		}
-
-		@Override
-		public boolean isTraceEnabled() {
-			return this.logger.isEnabled(Level.TRACE);
-		}
-
-		@Override
-		public void fatal(Object message) {
-			log(Level.FATAL, message, null);
-		}
-
-		@Override
-		public void fatal(Object message, Throwable exception) {
-			log(Level.FATAL, message, exception);
-		}
-
-		@Override
-		public void error(Object message) {
-			log(Level.ERROR, message, null);
-		}
-
-		@Override
-		public void error(Object message, Throwable exception) {
-			log(Level.ERROR, message, exception);
-		}
-
-		@Override
-		public void warn(Object message) {
-			log(Level.WARN, message, null);
-		}
-
-		@Override
-		public void warn(Object message, Throwable exception) {
-			log(Level.WARN, message, exception);
-		}
-
-		@Override
-		public void info(Object message) {
-			log(Level.INFO, message, null);
-		}
-
-		@Override
-		public void info(Object message, Throwable exception) {
-			log(Level.INFO, message, exception);
-		}
-
-		@Override
-		public void debug(Object message) {
-			log(Level.DEBUG, message, null);
-		}
-
-		@Override
-		public void debug(Object message, Throwable exception) {
-			log(Level.DEBUG, message, exception);
-		}
-
-		@Override
-		public void trace(Object message) {
-			log(Level.TRACE, message, null);
-		}
-
-		@Override
-		public void trace(Object message, Throwable exception) {
-			log(Level.TRACE, message, exception);
-		}
-
-		private void log(Level level, Object message, Throwable exception) {
-			if (message instanceof String) {
-				// Explicitly pass a String argument, avoiding Log4j's argument expansion
-				// for message objects in case of "{}" sequences (SPR-16226)
-				if (exception != null) {
-					this.logger.logIfEnabled(FQCN, level, null, (String) message, exception);
-				}
-				else {
-					this.logger.logIfEnabled(FQCN, level, null, (String) message);
-				}
-			}
-			else {
-				this.logger.logIfEnabled(FQCN, level, null, message, exception);
-			}
-		}
-	}
-
 
 	@SuppressWarnings("serial")
 	private static class Slf4jLog<T extends Logger> implements Log, Serializable {
