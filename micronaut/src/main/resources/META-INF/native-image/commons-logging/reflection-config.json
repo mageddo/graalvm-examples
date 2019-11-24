@@ -16,5 +16,11 @@
 		"allDeclaredConstructors" : true,
 		"allDeclaredMethods" : true,
 		"allDeclaredFields" : true
+	},
+	{
+		"name": "java.lang.String",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true,
+		"allDeclaredFields" : true
 	}
 ]
