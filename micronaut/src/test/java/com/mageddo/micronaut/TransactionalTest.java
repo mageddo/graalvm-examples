@@ -7,7 +7,6 @@ import com.mageddo.tests.DatabaseConfiguratorExtension;
 import io.micronaut.test.annotation.MicronautTest;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
-import lombok.var;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

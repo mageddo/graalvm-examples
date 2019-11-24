@@ -5,7 +5,6 @@ import com.mageddo.rawstringliterals.RawStrings;
 import com.mageddo.rawstringliterals.Rsl;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.test.annotation.MicronautTest;
-import lombok.var;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

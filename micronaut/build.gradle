@@ -7,7 +7,7 @@ buildscript {
 plugins {
 	id "java"
 	id "com.palantir.graal" version "0.4.0"
-	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.2"
+//	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.2"
 }
 
 allprojects {
@@ -19,8 +19,8 @@ allprojects {
 		maven { url = 'https://oss.sonatype.org/service/local/repositories/releases/content' }
 	}
 	apply plugin: 'java'
-	sourceCompatibility = JavaVersion.VERSION_1_8
-	targetCompatibility = JavaVersion.VERSION_1_8
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
 }
 
 def className = "com.mageddo.micronaut.Application"
@@ -40,21 +40,17 @@ graal {
 	mainClass className
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-	option("-H:IncludeResources=static/.*|templates/.*|.*.properties|.*.xml|META-INF/http/.*")
-	option("-H:IncludeResources=application.properties")
-	option("--allow-incomplete-classpath")
 	option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json")
-	option("-H:+AllowVMInspection")
-	option("--initialize-at-run-time=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
-	option("--initialize-at-build-time=org.postgresql.Driver")
-	option("--initialize-at-build-time=org.postgresql.util.SharedTimer")
-	option("--initialize-at-build-time=org.springframework.jdbc.datasource.ConnectionProxy")
-	option("--no-fallback")
-	option("-H:+ReportUnsupportedElementsAtRuntime")
-	option("-H:+TraceClassInitialization")
-	option("-H:EnableURLProtocols=http")
-	option("-Dfile.encoding=UTF-8")
-	option("--no-server")
+//	option("--initialize-at-run-time=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
+//	option("--initialize-at-build-time=org.postgresql.Driver")
+//	option("--initialize-at-build-time=org.postgresql.util.SharedTimer")
+//	option("--initialize-at-build-time=org.springframework.jdbc.datasource.ConnectionProxy")
+//	option("--no-fallback")
+//	option("-H:+ReportUnsupportedElementsAtRuntime")
+//	option("-H:+TraceClassInitialization")
+//	option("-H:EnableURLProtocols=http")
+//	option("-Dfile.encoding=UTF-8")
+//	option("--no-server")
 	option("-J-Xmx5G")
 }
 
@@ -127,5 +123,3 @@ project(":test-commons"){
 		compileOnly ("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	}
 }
-
-nativeImage.dependsOn(tasks.reflectConfigFiles)

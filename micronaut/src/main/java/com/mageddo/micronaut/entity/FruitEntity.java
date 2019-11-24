@@ -1,10 +1,9 @@
 package com.mageddo.micronaut.entity;
 
-import com.mageddo.graal.reflection.configuration.RuntimeReflection;
+import io.micronaut.core.annotation.TypeHint;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.time.LocalDateTime;
-
+@TypeHint
 public class FruitEntity {
 
 	private String name;
