@@ -1,63 +1,52 @@
-buildscript {
-	repositories {
-		mavenLocal()
-	}
-}
-
 plugins {
 	id "java"
-	id "com.palantir.graal" version "0.4.0"
-//	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.2"
+	id "application"
+	id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
+	id "org.flywaydb.flyway" version "6.0.8"
 }
 
 allprojects {
 	repositories {
-		mavenLocal()
 		mavenCentral()
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		maven { url "https://dl.bintray.com/micronaut/core-releases-local" }
-		maven { url = 'https://oss.sonatype.org/service/local/repositories/releases/content' }
 	}
 	apply plugin: 'java'
 	sourceCompatibility = JavaVersion.VERSION_11
 	targetCompatibility = JavaVersion.VERSION_11
 }
 
-def className = "com.mageddo.micronaut.Application"
+mainClassName = "com.mageddo.micronaut.Application"
 
 task debug(type: JavaExec){
 	debug = true
 	classpath = sourceSets.main.runtimeClasspath
-	main = className
-}
-
-task run(type: JavaExec){
-	classpath = sourceSets.main.runtimeClasspath
-	main = className
+	main = mainClassName
 }
 
 graal {
-	mainClass className
+	mainClass mainClassName
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-	option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json")
-//	option("--initialize-at-run-time=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.util.ThreadLocalInsecureRandom,com.sun.jndi.dns.DnsClient")
-//	option("--initialize-at-build-time=org.postgresql.Driver")
-//	option("--initialize-at-build-time=org.postgresql.util.SharedTimer")
-//	option("--initialize-at-build-time=org.springframework.jdbc.datasource.ConnectionProxy")
-//	option("--no-fallback")
-//	option("-H:+ReportUnsupportedElementsAtRuntime")
-//	option("-H:+TraceClassInitialization")
-//	option("-H:EnableURLProtocols=http")
-//	option("-Dfile.encoding=UTF-8")
-//	option("--no-server")
 	option("-J-Xmx5G")
+	option("--no-server")
 }
 
+flyway {
+	url = "jdbc:postgresql://localhost:5433/db"
+	user = "root"
+	password = "root"
+	validateOnMigrate = false
+	locations = ['filesystem:src/main/resources/db/migrations']
+}
+
+configurations {
+	compile.exclude module: 'spring-jcl'
+}
 dependencies {
 
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+	compileOnly("com.mageddo:rsl:1.0.0")
 	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
 	compile ("com.zaxxer:HikariCP:3.3.1")
@@ -77,21 +66,23 @@ dependencies {
 	annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 	compile "io.micronaut:micronaut-inject:${micronautVersion}"
 	compile ("io.micronaut:micronaut-views-thymeleaf:1.2.0")
+	compile ("io.micronaut:micronaut-management:${micronautVersion}")
 
-	compile("com.mageddo:rsl:1.0.0")
 	compile("com.mageddo:commons:1.5.0")
 	compile ("ch.qos.logback:logback-classic:1.2.3")
 
 //	tag::graal[]
 	annotationProcessor "io.micronaut:micronaut-graal:${micronautVersion}"
-	compileOnly("com.mageddo:graal-reflection-configuration:2.0.0")
-	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
+	compileOnly("com.oracle.substratevm:svm:19.2.1")
 	compile ("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+	compile ("commons-logging:commons-logging:1.2")
+
 	//end::graal[]
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
 
+	testCompileOnly("com.mageddo:rsl:1.0.0")
 	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 	testAnnotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
@@ -122,4 +113,20 @@ project(":test-commons"){
 		compile "io.micronaut:micronaut-inject-java:${micronautVersion}"
 		compileOnly ("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	}
+}
+
+task copyToLib(type: Copy) {
+	into "$buildDir/libs/lib"
+	from configurations.runtime
+}
+
+task fatJar(type: Jar, dependsOn: copyToLib) {
+	archiveBaseName = "${project.name}-all"
+	manifest {
+		attributes(
+			'Main-Class': mainClassName,
+			'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
+		)
+	}
+	with jar
 }
