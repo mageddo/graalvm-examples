@@ -8,7 +8,7 @@ plugins {
 	id "java"
 	id "application"
 	id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
-	id "org.flywaydb.flyway" version "5.0.7"
+	id "org.flywaydb.flyway" version "6.0.8"
 }
 
 allprojects {
@@ -49,7 +49,7 @@ flyway {
 	user = "root"
 	password = "root"
 	validateOnMigrate = false
-	locations = "${project.projectDir}/src/main/resources/db/migrations"
+	locations = ['filesystem:src/main/resources/db/migrations']
 }
 
 configurations {
