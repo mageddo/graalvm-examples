@@ -77,7 +77,6 @@ dependencies {
 
 //	tag::graal[]
 	annotationProcessor "io.micronaut:micronaut-graal:${micronautVersion}"
-	compileOnly("com.mageddo:graal-reflection-configuration:2.0.0")
 	compileOnly("com.oracle.substratevm:svm:19.2.1")
 	compile ("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
 	compile ("commons-logging:commons-logging:1.2")
