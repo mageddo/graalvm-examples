@@ -37,13 +37,6 @@ graal {
 	option("--no-server")
 }
 
-jar {
-	archiveBaseName = "${project.name}-all"
-	into("lib") {
-		from configurations.runtime
-	}
-}
-
 flyway {
 	url = "jdbc:postgresql://localhost:5433/db"
 	user = "root"
@@ -55,11 +48,12 @@ flyway {
 configurations {
 	compile.exclude module: 'spring-jcl'
 }
-
 dependencies {
 
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+	compileOnly("com.mageddo:rsl:1.0.0")
 	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 
 	compile ("com.zaxxer:HikariCP:3.3.1")
@@ -81,7 +75,6 @@ dependencies {
 	compile ("io.micronaut:micronaut-views-thymeleaf:1.2.0")
 	compile ("io.micronaut:micronaut-management:${micronautVersion}")
 
-	compile("com.mageddo:rsl:1.0.0")
 	compile("com.mageddo:commons:1.5.0")
 	compile ("ch.qos.logback:logback-classic:1.2.3")
 
@@ -96,6 +89,7 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
 
+	testCompileOnly("com.mageddo:rsl:1.0.0")
 	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
 	testAnnotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
@@ -126,4 +120,27 @@ project(":test-commons"){
 		compile "io.micronaut:micronaut-inject-java:${micronautVersion}"
 		compileOnly ("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	}
+}
+
+task copyToLib(type: Copy) {
+	into "$buildDir/libs/lib"
+	from configurations.runtime
+}
+
+task fatJar(type: Jar, dependsOn: copyToLib) {
+	archiveBaseName = "${project.name}-all"
+	manifest {
+		attributes (
+			'Main-Class': mainClassName,
+			'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
+		)
+	}
+//	into("lib") {
+//		from configurations.runtime
+//	}
+//	from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+//	manifest {
+//		attributes 'Main-Class': mainClassName
+//	}
 }

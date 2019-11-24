@@ -6,9 +6,5 @@
 	{
 		"name": "org.springframework.transaction.TransactionDefinition",
 		"allDeclaredFields" : true
-	},
-	{
-		"name": "[Ljava.sql.Statement",
-		"allDeclaredConstructors": true
 	}
 ]
