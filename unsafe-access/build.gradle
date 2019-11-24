@@ -1,0 +1,23 @@
+plugins {
+    id "java"
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+version "0.1"
+group "com.mageddo"
+
+sourceCompatibility = JavaVersion.VERSION_11
+
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'com.mageddo.Main'
+        )
+    }
+
+    archiveBaseName = "unsafe-access"
+    archiveClassifier = "all"
+    archiveVersion = ""
+}
