@@ -8,7 +8,7 @@
 		"allDeclaredFields" : true
 	},
 	{
-		"name": "java.sql.Statement[]",
+		"name": "[java.sql.Statement",
 		"allDeclaredConstructors": true
 	}
 ]
