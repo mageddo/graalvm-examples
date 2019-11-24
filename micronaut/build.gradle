@@ -14,9 +14,6 @@ allprojects {
 	repositories {
 		mavenLocal()
 		mavenCentral()
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		maven { url "https://dl.bintray.com/micronaut/core-releases-local" }
-		maven { url = 'https://oss.sonatype.org/service/local/repositories/releases/content' }
 	}
 	apply plugin: 'java'
 	sourceCompatibility = JavaVersion.VERSION_11
@@ -84,9 +81,6 @@ dependencies {
 	compileOnly("com.oracle.substratevm:svm:19.2.1")
 	compile ("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
 	compile ("commons-logging:commons-logging:1.2")
-//	compileOnly("org.apache.logging.log4j:log4j-api:2.12.1")
-//	compileOnly("org.apache.logging.log4j:log4j-core:2.12.1")
-//	compileOnly 'log4j:log4j:1.2.17'
 
 	//end::graal[]
 
