@@ -1,2 +1,2 @@
 ./gradlew build fatJar
-native-image --no-server -cp ./build/libs/micronaut-all.jar
+native-image -J-Xmx5G --no-server -cp ./build/libs/micronaut-all.jar

@@ -130,17 +130,10 @@ task copyToLib(type: Copy) {
 task fatJar(type: Jar, dependsOn: copyToLib) {
 	archiveBaseName = "${project.name}-all"
 	manifest {
-		attributes (
+		attributes(
 			'Main-Class': mainClassName,
 			'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
 		)
 	}
-//	into("lib") {
-//		from configurations.runtime
-//	}
-//	from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
 	with jar
-//	manifest {
-//		attributes 'Main-Class': mainClassName
-//	}
 }
