@@ -36,12 +36,6 @@ class ReflectionClasses implements Feature {
 			.clazz(org.thymeleaf.standard.expression.EqualsExpression.class)
 			.clazz(org.thymeleaf.standard.expression.NotEqualsExpression.class)
 			.build();
-
-		// spring logging
-		SubstrateVM
-			.builder()
-			.clazz(org.apache.commons.logging.LogFactory.class)
-			.build();
 	}
 
 }

@@ -6,8 +6,9 @@ buildscript {
 
 plugins {
 	id "java"
-	id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
 	id "application"
+	id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
+	id "org.flywaydb.flyway" version "5.0.7"
 }
 
 allprojects {
@@ -41,6 +42,14 @@ jar {
 	into("lib") {
 		from configurations.runtime
 	}
+}
+
+flyway {
+	url = "jdbc:postgresql://localhost:5433/db"
+	user = "root"
+	password = "root"
+	validateOnMigrate = false
+	locations = "${project.projectDir}/src/main/resources/db/migrations"
 }
 
 configurations {
