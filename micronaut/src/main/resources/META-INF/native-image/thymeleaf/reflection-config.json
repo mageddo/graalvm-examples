@@ -1,0 +1,14 @@
+[
+	{
+		"name": "org.thymeleaf.standard.expression.AdditionExpression",
+		"allDeclaredConstructors": true
+	},
+	{
+		"name": "org.thymeleaf.standard.expression.EqualsExpression",
+		"allDeclaredConstructors": true
+	},
+	{
+		"name": "org.thymeleaf.standard.expression.NotEqualsExpression",
+		"allDeclaredConstructors": true
+	}
+]
