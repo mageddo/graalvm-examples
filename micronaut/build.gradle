@@ -46,9 +46,9 @@ jar {
 	}
 }
 
-//configurations {
-//	compile.exclude module: 'spring-jcl'
-//}
+configurations {
+	compile.exclude module: 'spring-jcl'
+}
 
 dependencies {
 
@@ -83,7 +83,11 @@ dependencies {
 	compileOnly("com.mageddo:graal-reflection-configuration:2.0.0")
 	compileOnly("com.oracle.substratevm:svm:19.2.1")
 	compile ("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
-	//	compileOnly("org.apache.logging.log4j:log4j-core:2.12.1")
+	compile ("commons-logging:commons-logging:1.2")
+//	compileOnly("org.apache.logging.log4j:log4j-api:2.12.1")
+//	compileOnly("org.apache.logging.log4j:log4j-core:2.12.1")
+//	compileOnly 'log4j:log4j:1.2.17'
+
 	//end::graal[]
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
