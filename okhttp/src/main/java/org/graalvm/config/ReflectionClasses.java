@@ -10,7 +10,6 @@ class ReflectionClasses implements Feature {
 	public void duringSetup(DuringSetupAccess access) {
 		System.out.println("java.library.path=" + System.getProperty("java.library.path"));
 		System.loadLibrary("sunec");
-//		ImageSingletons.add(LogHandler.class, new NopLogHandler());
 	}
 }
 
