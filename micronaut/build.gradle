@@ -46,8 +46,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
-	compileOnly("com.mageddo:rsl:1.0.0")
-	annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
+	compileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
+	annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
 
 	compile ("com.zaxxer:HikariCP:3.3.1")
 	compile ("org.postgresql:postgresql:42.2.5")
@@ -82,8 +82,9 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
 
-	testCompileOnly("com.mageddo:rsl:1.0.0")
-	testAnnotationProcessor('com.mageddo:rsl-compiler:1.0.1')
+	testCompileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
+	testAnnotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
+
 	testAnnotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
 	testCompile(project(":test-commons"))
@@ -100,7 +101,9 @@ project(":test-commons"){
 		compileOnly 'org.projectlombok:lombok:1.18.10'
 		annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
-		annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
+		compileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
+		annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
+
 		annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
 		compile "org.junit.jupiter:junit-jupiter:5.4.2"

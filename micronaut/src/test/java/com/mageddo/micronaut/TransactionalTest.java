@@ -1,7 +1,6 @@
 package com.mageddo.micronaut;
 
 import com.mageddo.micronaut.service.FruitsService;
-import com.mageddo.rawstringliterals.Rsl;
 import com.mageddo.tests.DatabaseConfigurator;
 import com.mageddo.tests.DatabaseConfiguratorExtension;
 import io.micronaut.test.annotation.MicronautTest;
@@ -22,7 +21,6 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Rsl
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @MicronautTest(environments = "test")
 @ExtendWith({DatabaseConfiguratorExtension.class})
