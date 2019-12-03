@@ -6,5 +6,10 @@
 	{
 		"name": "org.springframework.transaction.TransactionDefinition",
 		"allDeclaredFields" : true
+	},
+	{
+		"name": "java.sql.Statement[]",
+		"allPublicConstructors": true,
+		"allDeclaredConstructors": true
 	}
 ]
