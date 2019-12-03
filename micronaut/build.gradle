@@ -44,6 +44,9 @@ configurations {
 }
 dependencies {
 
+	compileOnly 'org.projectlombok:lombok:1.18.10'
+	annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
 	compileOnly("com.mageddo.lombok:lombok-ext:2.3.1")
 	annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.1")
 
@@ -77,6 +80,9 @@ dependencies {
 
 	//end::graal[]
 
+	testCompileOnly 'org.projectlombok:lombok:1.18.10'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
+
 	testCompileOnly("com.mageddo.lombok:lombok-ext:2.3.1")
 	testAnnotationProcessor("com.mageddo.lombok:lombok-ext:2.3.1")
 
@@ -96,7 +102,9 @@ project(":test-commons"){
 		compileOnly 'org.projectlombok:lombok:1.18.10'
 		annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
-		annotationProcessor('com.mageddo:rsl-compiler:1.0.1')
+		compileOnly("com.mageddo.lombok:lombok-ext:2.3.1")
+		annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.1")
+
 		annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
 		compile "org.junit.jupiter:junit-jupiter:5.4.2"
