@@ -1,9 +1,9 @@
 package com.mageddo.graalvm.okhttp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.mageddo.graal.reflection.configuration.RuntimeReflection;
+import nativeimage.Reflection;
 
-@RuntimeReflection
+@Reflection(declaredMethods = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Contributor {
 
