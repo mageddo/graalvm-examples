@@ -7,7 +7,6 @@ plugins {
 
 allprojects {
 	repositories {
-		mavenLocal()
 		mavenCentral()
 	}
 	apply plugin: 'java'
@@ -47,8 +46,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
-	compileOnly("com.mageddo.lombok:lombok-ext:2.3.1")
-	annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.1")
+	compileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
+	annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
 
 	compile ("com.zaxxer:HikariCP:3.3.1")
 	compile ("org.postgresql:postgresql:42.2.5")
@@ -83,8 +82,8 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
 
-	testCompileOnly("com.mageddo.lombok:lombok-ext:2.3.1")
-	testAnnotationProcessor("com.mageddo.lombok:lombok-ext:2.3.1")
+	testCompileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
+	testAnnotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
 
 	testAnnotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
@@ -102,8 +101,8 @@ project(":test-commons"){
 		compileOnly 'org.projectlombok:lombok:1.18.10'
 		annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
-		compileOnly("com.mageddo.lombok:lombok-ext:2.3.1")
-		annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.1")
+		compileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
+		annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
 
 		annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
 
