@@ -49,3 +49,19 @@ dependencies {
 	//end::graal[]
 
 }
+
+task copyToLib(type: Copy) {
+	into "$buildDir/libs/lib"
+	from configurations.runtime
+}
+
+task fatJar(type: Jar, dependsOn: copyToLib) {
+	archiveBaseName = "${project.name}-all"
+	manifest {
+		attributes(
+			'Main-Class': mainClassName,
+			'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
+		)
+	}
+	with jar
+}
