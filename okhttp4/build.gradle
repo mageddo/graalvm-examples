@@ -10,23 +10,29 @@ repositories {
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
-
-def className = "com.mageddo.graalvm.okhttp.Application"
-
-mainClassName = className
+mainClassName = "com.mageddo.graalvm.okhttp.Application"
 
 task debug(type: JavaExec){
 	debug = true
 	classpath = sourceSets.main.runtimeClasspath
-	main = className
+	main = mainClassName
 }
 
 graal {
-	mainClass className
+	mainClass mainClassName
 	graalVersion(graalVMVersion)
 	outputName(project.name)
 	downloadBaseUrl("https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz#")
 	option("--no-server")
+}
+
+jar {
+	manifest {
+		attributes (
+			'Main-Class': mainClassName,
+		)
+	}
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 dependencies {
