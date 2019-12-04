@@ -1,7 +1,8 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.3.61"
     id "java"
     id "application"
+    id "org.jetbrains.kotlin.jvm" version "1.3.61"
+    id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
 }
 
 repositories {
@@ -9,6 +10,14 @@ repositories {
 }
 
 mainClassName = 'com.mageddo.MainKt'
+graal {
+    mainClass mainClassName
+    graalVersion(graalVMVersion)
+    outputName(project.name)
+    option("-J-Xmx5G")
+    option("--no-server")
+}
+
 
 dependencies {
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: "1.3.61"
