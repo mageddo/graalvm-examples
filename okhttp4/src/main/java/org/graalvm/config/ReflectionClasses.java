@@ -16,17 +16,5 @@ class ReflectionClasses implements Feature {
 		System.loadLibrary("sunec");
 	}
 
-	@Override
-	public void beforeAnalysis(BeforeAnalysisAccess access) {
-
-//		try {
-//			RuntimeReflection.register(Class.forName("okhttp3.CookieJar$Companion$NO_COOKIES$1"));
-//			RuntimeReflection.register(CookieJar.class.getDeclaredField("NO_COOKIES"));
-//			RuntimeReflection.register(Authenticator.class.getDeclaredField("NONE"));
-//			RuntimeReflection.register(Dns.class.getDeclaredField("SYSTEM"));
-//		} catch (ClassNotFoundException e) {
-//			System.out.println("hey");
-//		}
-	}
 }
 
