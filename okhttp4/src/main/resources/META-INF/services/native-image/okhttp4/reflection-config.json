@@ -8,5 +8,8 @@
 		"name": "com.fasterxml.jackson.databind.ext.Java7SupportImpl",
 		"allDeclaredConstructors" : true,
 		"allDeclaredMethods" : true
+	},
+	{
+		"name": "okhttp3.CookieJar$Companion$NO_COOKIES$1"
 	}
 ]
