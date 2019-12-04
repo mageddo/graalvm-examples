@@ -13,6 +13,7 @@ class ReflectionClasses : Feature {
     }
 
     override fun beforeAnalysis(access: BeforeAnalysisAccess) {
-        RuntimeReflection.register(Stuff.javaClass.getDeclaredField("DEFAULT_STUFF"))
+//        RuntimeReflection.register(Stuff::class.java.getDeclaredField("DEFAULT_STUFF"))
+        RuntimeReflection.register(Stuff.DEFAULT_STUFF.javaClass)
     }
 }

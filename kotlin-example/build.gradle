@@ -14,6 +14,8 @@ graal {
     mainClass mainClassName
     graalVersion(graalVMVersion)
     outputName(project.name)
+    option("--initialize-at-build-time=com.mageddo.Stuff")
+    option("--initialize-at-build-time=com.mageddo.Stuff\$Companion\$DEFAULT_STUFF\$1")
     option("-J-Xmx5G")
     option("--no-server")
 }
