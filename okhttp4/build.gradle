@@ -5,6 +5,7 @@ plugins {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
@@ -34,7 +35,7 @@ dependencies {
 	annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
 
 	compile("ch.qos.logback:logback-classic:1.2.3")
-	compile("com.squareup.okhttp3:okhttp:4.2.2")
+	compile("com.squareup.okhttp3:okhttp:4.3.1-SNAPSHOT")
 	compile("com.fasterxml.jackson.core:jackson-databind:2.9.9")
 
 //	tag::graal[]
