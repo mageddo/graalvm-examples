@@ -25,6 +25,7 @@ task debug(type: JavaExec){
 graal {
 	mainClass mainClassName
 	graalVersion(graalVMVersion)
+	downloadBaseUrl("https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz#")
 	outputName(project.name)
 	option("-J-Xmx5G")
 	option("--no-server")
