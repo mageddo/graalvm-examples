@@ -26,15 +26,6 @@ graal {
 	option("--no-server")
 }
 
-jar {
-	manifest {
-		attributes (
-			'Main-Class': mainClassName,
-		)
-	}
-	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
-
 dependencies {
 
 	compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
@@ -49,4 +40,20 @@ dependencies {
 	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
 	//end::graal[]
 
+}
+
+task copyToLib(type: Copy) {
+	into "$buildDir/libs/lib"
+	from configurations.runtime
+}
+
+task fatJar(type: Jar, dependsOn: copyToLib) {
+	archiveBaseName = "${project.name}-all"
+	manifest {
+		attributes(
+			'Main-Class': mainClassName,
+			'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
+		)
+	}
+	with jar
 }
