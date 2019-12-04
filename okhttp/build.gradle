@@ -31,7 +31,7 @@ graal {
 	mainClass className
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-	downloadBaseUrl("https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz#")
+	downloadBaseUrl("https://github.com/oracle/graal/releases/download/vm-19.2.1/graalvm-ce-linux-amd64-19.2.1.tar.gz#")
 }
 
 dependencies {

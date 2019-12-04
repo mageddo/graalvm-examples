@@ -3,7 +3,7 @@ package com.mageddo.graalvm.okhttp;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import nativeimage.Reflection;
 
-@Reflection(declaredMethods = true)
+@Reflection(declaredMethods = true, constructors = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Contributor {
 
