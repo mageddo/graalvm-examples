@@ -1,14 +1,11 @@
 package org.graalvm.config;
 
 import com.oracle.svm.core.annotate.AutomaticFeature;
-import com.oracle.svm.hosted.jni.JNIRuntimeAccess;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.LogFactoryImpl;
-import org.apache.commons.logging.impl.NoOpLog;
 import org.apache.commons.logging.impl.SimpleLog;
 import org.graalvm.nativeimage.hosted.Feature;
 import org.graalvm.nativeimage.hosted.RuntimeReflection;
-import sun.security.ec.ECKeyPairGenerator;
 
 import javax.net.ssl.SSLContext;
 import java.lang.reflect.Constructor;
