@@ -22,7 +22,7 @@ public class OkHttpContributors {
 	private final String baseURI;
 
 	public OkHttpContributors() {
-		this.baseURI = "http://api.github.com";
+		this.baseURI = "https://api.github.com";
 	}
 
 	public List<Contributor> findContributors() {
