@@ -1,5 +1,10 @@
 #!/bin/bash
 
 set -e
+
 ./gradlew clean build fatJar
-native-image --no-fallback --no-server -cp ./build/libs/graalvm-okhttp4-all.jar com.mageddo.graalvm.okhttp.Application
+mkdir -p build/graal
+native-image --no-server \
+  -H:Path=./build/graal \
+  -H:Name=graalvm-okhttp4 \
+  -cp ./build/libs/graalvm-okhttp4-all.jar

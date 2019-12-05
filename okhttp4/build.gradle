@@ -22,9 +22,7 @@ graal {
 	mainClass mainClassName
 	graalVersion(graalVMVersion)
 	outputName(project.name)
-	downloadBaseUrl("https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz#")
 	option("--no-server")
-	option("--verbose")
 }
 
 dependencies {
@@ -32,12 +30,13 @@ dependencies {
 	compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
 	annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
 
-	compile("ch.qos.logback:logback-classic:1.2.3")
+	compile("org.slf4j:slf4j-simple:1.7.29")
+//	compile("ch.qos.logback:logback-classic:1.2.3")
 	compile("com.squareup.okhttp3:okhttp:4.3.1-SNAPSHOT")
 	compile("com.fasterxml.jackson.core:jackson-databind:2.9.9")
 
 //	tag::graal[]
-	compileOnly("com.oracle.substratevm:svm:19.2.1")
+	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
 	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
 	//end::graal[]
 
