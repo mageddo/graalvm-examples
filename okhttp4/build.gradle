@@ -9,7 +9,7 @@ repositories {
 	mavenCentral()
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_1_8
 mainClassName = "com.mageddo.graalvm.okhttp.Application"
 
 task debug(type: JavaExec){
