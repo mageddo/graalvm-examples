@@ -1,0 +1,59 @@
+plugins {
+	id "java"
+	id "application"
+	id "com.palantir.graal" version "0.6.0-43-gd59c8dc"
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+mainClassName = "com.mageddo.graalvm.okhttp.Application"
+
+task debug(type: JavaExec){
+	debug = true
+	classpath = sourceSets.main.runtimeClasspath
+	main = mainClassName
+}
+
+graal {
+	mainClass mainClassName
+	graalVersion(graalVMVersion)
+	outputName(project.name)
+	option("--no-server")
+}
+
+dependencies {
+
+	compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
+	annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
+
+	compile("org.slf4j:slf4j-simple:1.7.29")
+//	compile("ch.qos.logback:logback-classic:1.2.3")
+	compile("com.squareup.okhttp3:okhttp:4.3.1-SNAPSHOT")
+	compile("com.fasterxml.jackson.core:jackson-databind:2.9.9")
+
+//	tag::graal[]
+	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
+	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+	//end::graal[]
+
+}
+
+task copyToLib(type: Copy) {
+	into "$buildDir/libs/lib"
+	from configurations.runtime
+}
+
+task fatJar(type: Jar, dependsOn: copyToLib) {
+	archiveBaseName = "${project.name}-all"
+	manifest {
+		attributes(
+			'Main-Class': mainClassName,
+			'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
+		)
+	}
+	with jar
+}
