@@ -3,13 +3,16 @@ package com.mageddo.graalvm.bc;
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jsse.provider.BouncyCastleJsseProvider;
+import sun.security.jca.ProviderList;
+import sun.security.jca.Providers;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.Security;
+import java.security.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Application {
 
@@ -19,19 +22,55 @@ public class Application {
 	}
 
 	static void setupBC() {
+
+//		Providers.getProviderList().providers().add(new BouncyCastleProvider());
+		final BouncyCastleProvider provider = new BouncyCastleProvider();
+//		provider.addAlgorithm("SecureRandom.DEFAULT", "org.bouncycastle.jcajce.provider.drbg.DRBG$Default");
+		System.out.println(Providers.getProviderList().toString());
+		for (Object key : provider.keySet()) {
+			System.out.printf("k=%s, v=%s%n", key, provider.get(String.valueOf(key)));
+		}
+		System.out.printf("secure provider = %s%n", provider.getService("SecureRandom", "DEFAULT"));
+
+		ProviderList providers = ProviderList.newList();
+		providers = ProviderList.insertAt(
+			Providers.getProviderList(), provider, 0
+		);
+		providers = ProviderList.remove(providers, "SunEC");
+		providers = ProviderList.remove(providers, "SunJSSE");
+		providers = ProviderList.remove(providers, "SunPKCS11");
+//		[BC, SUN, SunRsaSign, SunJCE, SunJGSS, SunSASL, XMLDSig, SunPCSC, JdkLDAP, JdkSASL, SunPKCS11]
+
+		Providers.setProviderList(providers);
+
+		System.out.println(Providers.getProviderList().toString());
+//		providers.add(new BouncyCastleProvider());
+
 		Security.removeProvider("SunEC");
 		Security.removeProvider("SunJSSE");
 
 		Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME);
-		Security.insertProviderAt(new BouncyCastleProvider(), 1);
+		Security.insertProviderAt(provider, 1);
 		Security.removeProvider(BouncyCastleJsseProvider.PROVIDER_NAME);
 		Security.insertProviderAt(new BouncyCastleJsseProvider(), 2);
+
+
+		Security.setProperty("ssl.KeyManagerFactory.algorithm", "X509");
+		System.setProperty("jdk.tls.trustNameService", "true");
 	}
 
 	public static void main(String[] args) throws Exception {
-		hashCalc(args);
-		doGet("https://api.github.com/repos/square/okhttp/contributors");
-		doGet("https://acme.com/robots.txt");
+		try {
+
+//			org.bouncycastle.jcajce.provider.drbg.DRBG$Default
+			final SecureRandom secureRandom = SecureRandom.getInstance("DEFAULT");
+			System.out.printf("secureRandom=%s, provider=%s%n", secureRandom, secureRandom.getProvider());
+			hashCalc(args);
+			doGet("https://acme.com/robots.txt");
+			doGet("https://api.github.com/repos/square/okhttp/contributors");
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	private static void doGet(String url) throws IOException {
