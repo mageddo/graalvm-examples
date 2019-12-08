@@ -22,11 +22,11 @@ public class OkHttpContributors {
 	private final String baseURI;
 
 	public OkHttpContributors() {
-		this.baseURI = "https://api.github.com";
+		this.baseURI = "http://api.github.com";
 	}
 
 	public List<Contributor> findContributors() {
-
+		System.out.println(baseURI);
 		Request request = new Request.Builder()
 			.url(
 				HttpUrl
