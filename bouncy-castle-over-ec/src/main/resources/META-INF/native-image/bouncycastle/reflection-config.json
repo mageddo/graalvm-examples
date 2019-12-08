@@ -8,5 +8,15 @@
 		"name": "org.bouncycastle.jcajce.provider.drbg.DRBG$Mappings",
 		"allDeclaredConstructors" : true,
 		"allDeclaredMethods" : true
+	},
+	{
+		"name": "org.bouncycastle.jcajce.provider.keystore.BC$Mappings",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true
+	},
+	{
+		"name": "org.bouncycastle.jcajce.provider.keystore.BCFKS$Mappings",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true
 	}
 ]
