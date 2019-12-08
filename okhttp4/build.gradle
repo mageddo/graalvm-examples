@@ -29,18 +29,9 @@ graal {
 
 dependencies {
 
-	compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
-	annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.1.1")
-
 	compile("org.slf4j:slf4j-simple:1.7.29")
 //	compile("ch.qos.logback:logback-classic:1.2.3")
 	compile("com.squareup.okhttp3:okhttp:4.3.0-20191205.122911-19")
-	compile("com.fasterxml.jackson.core:jackson-databind:2.9.9")
-
-//	tag::graal[]
-	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
-	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
-	//end::graal[]
 
 }
 
