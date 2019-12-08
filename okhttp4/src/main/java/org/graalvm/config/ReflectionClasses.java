@@ -8,8 +8,8 @@ class ReflectionClasses implements Feature {
 
 	@Override
 	public void duringSetup(DuringSetupAccess access) {
-//		System.out.println("java.library.path=" + System.getProperty("java.library.path"));
-//		System.loadLibrary("sunec");
+		System.out.printf("java.library.path=%s" + System.getProperty("java.library.path"));
+		System.loadLibrary("sunec");
 	}
 
 }

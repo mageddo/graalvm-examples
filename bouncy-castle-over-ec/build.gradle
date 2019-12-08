@@ -28,6 +28,7 @@ dependencies {
 	compile ("org.bouncycastle:bcpkix-jdk15on:1.64")
 	compile ("org.bouncycastle:bcprov-jdk15on:1.64")
 	compile ("org.bouncycastle:bctls-jdk15on:1.64")
+	compile ("commons-io:commons-io:2.6")
 
 //	tag::graal[]
 	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
