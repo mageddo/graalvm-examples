@@ -6,6 +6,7 @@ set -e
 mkdir -p build/graal
 native-image --no-server \
   -H:Path=./build/graal \
-  -H:Name=graalvm-okhttp4 \
-  -cp ./build/libs/graalvm-okhttp4-all.jar
-./build/graal/graalvm-okhttp4
+  -H:Name=graalvm-bouncy-castle-over-ec \
+  -cp ./build/libs/graalvm-bouncy-castle-over-ec-all.jar
+
+./build/graal/graalvm-bouncy-castle-over-ec

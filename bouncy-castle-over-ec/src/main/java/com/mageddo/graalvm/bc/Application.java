@@ -1,9 +1,8 @@
-package com.mageddo.graalvm.bouncycastleoverec;
+package com.mageddo.graalvm.bc;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jsse.provider.BouncyCastleJsseProvider;
 
-import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
@@ -15,7 +14,7 @@ public class Application {
 //		Security.addProvider(new BouncyCastleProvider());
 	}
 
-	private static void setupBC() {
+	static void setupBC() {
 		Security.removeProvider("SunEC");
 		Security.removeProvider("SunJSSE");
 

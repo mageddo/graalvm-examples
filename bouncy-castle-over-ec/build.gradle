@@ -9,7 +9,7 @@ repositories {
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
-mainClassName = ""
+mainClassName = "com.mageddo.graalvm.bc.Application"
 
 graal {
 	mainClass mainClassName

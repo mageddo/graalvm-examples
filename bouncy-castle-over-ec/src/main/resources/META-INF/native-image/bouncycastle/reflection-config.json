@@ -1,12 +1,3 @@
 [
-	{
-		"name": "java.util.ArrayList",
-		"allDeclaredConstructors" : true,
-		"allDeclaredMethods" : true
-	},
-	{
-		"name": "com.fasterxml.jackson.databind.ext.Java7SupportImpl",
-		"allDeclaredConstructors" : true,
-		"allDeclaredMethods" : true
-	}
+
 ]
