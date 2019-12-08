@@ -1,0 +1,19 @@
+plugins {
+	id "java"
+	id "application"
+	id "com.palantir.graal" version "0.6.0-43-gd59c8dc"
+}
+
+repositories {
+	mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+mainClassName = "com.mageddo.graalvm.dns.resolution.Application"
+
+graal {
+	mainClass mainClassName
+	graalVersion(graalVMVersion)
+	outputName(project.name)
+	option("--no-server")
+}
