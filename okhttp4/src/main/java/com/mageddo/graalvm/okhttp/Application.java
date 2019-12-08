@@ -1,19 +1,10 @@
 package com.mageddo.graalvm.okhttp;
 
-import okhttp3.CookieJar;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.graalvm.config.SslBuildConfig;
 
 public class Application {
-
-	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
-
 	public static void main(String[] args) throws Exception {
-
-		System.out.println(CookieJar.NO_COOKIES.getClass());
-
-		LOG.info("starting up ....");
+		SslBuildConfig.installTrustStore();
 		System.out.println(OkHttpContributors.PARSER.writeValueAsString(new OkHttpContributors().findContributors()));
 	}
-
 }

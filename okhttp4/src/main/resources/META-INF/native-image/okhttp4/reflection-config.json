@@ -8,5 +8,10 @@
 		"name": "com.fasterxml.jackson.databind.ext.Java7SupportImpl",
 		"allDeclaredConstructors" : true,
 		"allDeclaredMethods" : true
+	},
+	{
+		"name": "org.graalvm.config.TrustStoreProvider",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true
 	}
 ]
