@@ -1,9 +1,6 @@
 package com.mageddo;
 
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.Provider;
-import java.security.Security;
+import java.security.*;
 import java.util.Base64;
 
 public class Main {
@@ -15,9 +12,9 @@ public class Main {
         }
         System.out.println();
 
-        final var ec = KeyPairGenerator.getInstance("EC");
+        final KeyPairGenerator ec = KeyPairGenerator.getInstance("EC");
         ec.initialize(512);
-        final var keyPair = ec.generateKeyPair();
+        final KeyPair keyPair = ec.generateKeyPair();
         System.out.printf(
             "algorithm=%s, provider=%s, public key=%s%n",
             keyPair.getPublic().getAlgorithm(),
