@@ -1,6 +1,7 @@
 package com.mageddo.graalvm.okhttp;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.graalvm.config.SslBuildConfig;
 
 import java.security.Provider;
 import java.security.Security;
@@ -12,7 +13,7 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-//		SslBuildConfig.installTrustStore();
+		SslBuildConfig.installTrustStore();
 
 		System.out.print("providers=");
 		for (Provider provider : Security.getProviders()) {
@@ -24,6 +25,5 @@ public class Application {
 		System.out.println(OkHttpGetter.get("https://acme.com/robots.txt"));;
 		System.out.println(OkHttpGetter.get("https://api.github.com/repos/square/okhttp/contributors"));;
 
-		System.out.println(Thread.getAllStackTraces().keySet());
 	}
 }
