@@ -1,16 +1,11 @@
 package com.mageddo.graalvm.okhttp;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.graalvm.config.SslBuildConfig;
 
 import java.security.Provider;
 import java.security.Security;
 
 public class Application {
-
-	static {
-		Security.addProvider(new BouncyCastleProvider());
-	}
 
 	public static void main(String[] args) {
 		SslBuildConfig.installTrustStore();

@@ -1,5 +1,7 @@
 package org.graalvm.config;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -7,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.Security;
 
 public class SslBuildConfig {
 	private static byte[] TRUST_STORE;
@@ -22,6 +25,8 @@ public class SslBuildConfig {
 	 */
 	public static void installTrustStore() {
 		try {
+			Security.addProvider(new BouncyCastleProvider());
+
 			if(TRUST_STORE == null){
 				return;
 			}
