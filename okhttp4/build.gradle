@@ -29,6 +29,8 @@ graal {
 
 dependencies {
 
+	compile ("org.bouncycastle:bcpkix-jdk15on:1.64")
+	compile ("org.bouncycastle:bcprov-jdk15on:1.64")
 	compile("org.slf4j:slf4j-simple:1.7.29")
 //	compile("ch.qos.logback:logback-classic:1.2.3")
 	compile("com.squareup.okhttp3:okhttp:4.3.0-20191205.122911-19")
