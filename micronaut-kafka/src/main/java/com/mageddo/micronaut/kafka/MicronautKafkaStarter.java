@@ -36,6 +36,10 @@ public class MicronautKafkaStarter {
 		Micronaut.run(MicronautKafkaStarter.class);
 	}
 
+  public String vanillaProducerInit(@KafkaClient("vanilla") Producer<String, byte[]> producer){
+	  return "";
+  }
+
 //	@Scheduled(cron = "0/5 * * * * *")
 	public void ping(){
 		messageSender.send(new ProducerRecord<>("ping", LocalDateTime.now().toString().getBytes()));
