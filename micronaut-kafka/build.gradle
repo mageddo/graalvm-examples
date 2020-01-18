@@ -1,0 +1,48 @@
+plugins {
+  id "java"
+  id "application"
+  id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+mainClassName = "com.mageddo.micronaut.kafka.MicronautKafkaStarter"
+
+configurations {
+  compile.exclude module: 'spring-jcl'
+}
+dependencies {
+
+  annotationProcessor "io.micronaut:micronaut-validation:${micronautVersion}"
+  annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
+
+  compile "io.micronaut.configuration:micronaut-kafka:1.2.0"
+  compile "io.micronaut:micronaut-runtime:${micronautVersion}"
+  compile "io.micronaut:micronaut-inject:${micronautVersion}"
+  compileOnly "io.micronaut:micronaut-inject-java:${micronautVersion}"
+  compile("ch.qos.logback:logback-classic:1.2.3")
+
+  testCompile "junit:junit:4.12"
+  testCompileOnly("io.micronaut:micronaut-inject-java:${micronautVersion}")
+
+  //	tag::graal[]
+  annotationProcessor "io.micronaut:micronaut-graal:${micronautVersion}"
+//  compileOnly("com.oracle.substratevm:svm:19.2.1")
+//  compile ("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+  compile("commons-logging:commons-logging:1.2")
+  //end::graal[]
+}
+
+graal {
+  mainClass mainClassName
+  graalVersion("19.3.0")
+  downloadBaseUrl("https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz#")
+  outputName(project.name)
+  option("-J-Xmx5G")
+  option("--no-server")
+}

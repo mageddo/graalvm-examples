@@ -1,0 +1,15 @@
+kafka:
+  bootstrap:
+    servers: kafka.intranet:9092
+  consumers:
+    vanilla:
+      key:
+        deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value:
+        deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+  producers:
+    vanilla:
+      key:
+        serializer: org.apache.kafka.common.serialization.StringSerializer
+      value:
+        serializer: org.apache.kafka.common.serialization.ByteArraySerializer

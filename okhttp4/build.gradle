@@ -29,7 +29,7 @@ graal {
 
 dependencies {
 	compile ("org.bouncycastle:bcprov-jdk15on:1.64")
-	compile("com.squareup.okhttp3:okhttp:4.3.0-20191205.122911-19")
+	compile("com.squareup.okhttp3:okhttp:4.3.1")
 }
 
 task copyToLib(type: Copy) {

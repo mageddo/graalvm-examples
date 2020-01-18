@@ -1,0 +1,26 @@
+[
+	{
+		"name": "org.apache.commons.logging.LogFactory",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true,
+		"allDeclaredFields" : true
+	},
+	{
+		"name": "org.apache.commons.logging.impl.LogFactoryImpl",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true,
+		"allDeclaredFields" : true
+	},
+	{
+		"name": "org.apache.commons.logging.impl.NoOpLog",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true,
+		"allDeclaredFields" : true
+	},
+	{
+		"name": "java.lang.String",
+		"allDeclaredConstructors" : true,
+		"allDeclaredMethods" : true,
+		"allDeclaredFields" : true
+	}
+]
