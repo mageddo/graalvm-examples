@@ -22,23 +22,18 @@ import javax.inject.Singleton;
 import java.time.LocalDateTime;
 
 @Factory
-@Singleton
 public class MicronautKafkaStarter {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	private final MessageSender messageSender;
 
-	public MicronautKafkaStarter(MessageSender messageSender) {
+	public MicronautKafkaStarter(MessageSender messageSender, @KafkaClient("vanilla") Producer<String, byte[]> producer) {
 		this.messageSender = messageSender;
 	}
 
 	public static void main(String[] args) {
 		Micronaut.run(MicronautKafkaStarter.class);
 	}
-
-  public String vanillaProducerInit(@KafkaClient("vanilla") Producer<String, byte[]> producer){
-	  return "";
-  }
 
 //	@Scheduled(cron = "0/5 * * * * *")
 	public void ping(){
