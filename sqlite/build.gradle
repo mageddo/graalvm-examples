@@ -1,7 +1,6 @@
 plugins {
-	id 'java'
-	id 'application'
-	id "com.palantir.graal" version "0.4.0"
+	id "java"
+	id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
 repositories {
@@ -19,25 +18,10 @@ dependencies {
 	testImplementation("junit:junit:4.12")
 }
 
-mainClassName = "com.mageddo.sqlite.App"
+def mainClassName = "com.mageddo.sqlite.App"
 
-graal {
-	mainClass mainClassName
-	graalVersion(graalVMVersion)
-	outputName(project.name)
-	option("-H:IncludeResources=db/.*|static/.*|templates/.*|.*.yml|.*.xml|.*/org/sqlite/.*|org/sqlite/.*")
-	option("--allow-incomplete-classpath")
-	option("--initialize-at-build-time=org.sqlite.JDBC")
-	option("--initialize-at-build-time=org.sqlite.core.DB\$ProgressObserver")
-	option("--initialize-at-build-time=org.sqlite.core.DB")
-	option("--initialize-at-build-time=org.sqlite.core.NativeDB")
-	option("--initialize-at-build-time=org.sqlite.ProgressHandler")
-	option("--initialize-at-build-time=org.sqlite.Function")
-	option("--initialize-at-build-time=org.sqlite.Function\$Aggregate")
-	option("--initialize-at-build-time=org.sqlite.Function\$Window")	
-	option("-H:+AllowVMInspection")
-	option("-H:+ReportUnsupportedElementsAtRuntime")
-	option("-H:EnableURLProtocols=http")
-	option("-Dfile.encoding=UTF-8")
-	option("--no-server")
+jar {
+	manifest {
+		attributes "Main-Class": mainClassName
+	}
 }
