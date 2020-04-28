@@ -18,10 +18,6 @@ import java.util.Arrays;
 class JNIReflectionClasses implements Feature {
 
 	@Override
-	public void duringSetup(DuringSetupAccess access) {
-	}
-
-	@Override
 	public void beforeAnalysis(BeforeAnalysisAccess access) {
 		try {
 			JNIRuntimeAccess.register(NativeDB.class.getDeclaredMethod("_open_utf8", byte[].class, int.class));
@@ -51,7 +47,7 @@ class JNIReflectionClasses implements Feature {
 			ProgressHandler.class,
 			Function.Aggregate.class,
 			Function.Window.class,
-			org.sqlite.core.DB.ProgressObserver.class,			
+			org.sqlite.core.DB.ProgressObserver.class,
 			java.lang.Throwable.class,
 			boolean[].class
 		};
