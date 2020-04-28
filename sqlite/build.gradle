@@ -13,8 +13,8 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
 	implementation("org.xerial:sqlite-jdbc:3.27.2")
-	compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
-	implementation("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+	compileOnly("com.oracle.substratevm:svm:19.2.0")
+	implementation("org.graalvm.sdk:graal-sdk:20.0.0")
 	testImplementation("junit:junit:4.12")
 }
 
