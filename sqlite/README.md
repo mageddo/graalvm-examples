@@ -1,4 +1,4 @@
-This is an example of how to use sqlite with graalvm native image
+This is an example of how to use sqlite with graalvm 20.0.0 native image
 
 ### Using on standard JVM 
 
