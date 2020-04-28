@@ -30,7 +30,7 @@ class JNIReflectionClasses implements Feature {
 	/**
 	 * All classes defined here will have reflection support and be registered as spring beans
 	 */
-	static Class<?>[] getBeans(){
+	Class<?>[] getBeans(){
 		return new Class[]{
 		};
 	}
@@ -38,22 +38,18 @@ class JNIReflectionClasses implements Feature {
 	/**
 	 * All classes defined here will have reflection support
 	 */
-	static Class<?>[] getClasses(){
+	Class<?>[] getClasses(){
 		return new Class[]{
-			org.sqlite.core.DB.class,
 			NativeDB.class,
-			BusyHandler.class,
 			Function.class,
-			ProgressHandler.class,
 			Function.Aggregate.class,
+			ProgressHandler.class,
 			Function.Window.class,
-			org.sqlite.core.DB.ProgressObserver.class,
-			java.lang.Throwable.class,
-			boolean[].class
+			org.sqlite.core.DB.ProgressObserver.class
 		};
 	}
 
-	static void setupClasses() {
+	void setupClasses() {
 		try {
 			System.out.println("> Loading classes for future reflection support");
 			for (final Class<?> clazz : getBeans()) {
@@ -72,7 +68,7 @@ class JNIReflectionClasses implements Feature {
 	/**
 	 * Register all constructors and methods on graalvm to reflection support at runtime
 	 */
-	private static void process(Class<?> clazz) {
+	private void process(Class<?> clazz) {
 		try {
 			System.out.println("> Declaring class: " + clazz.getCanonicalName());
 			RuntimeReflection.register(clazz);
