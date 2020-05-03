@@ -1,7 +1,7 @@
 plugins {
 	id "java"
-	id "application"
-	id "com.palantir.graal" version "0.6.0-36-ga4a46b6"
+	id "com.github.johnrengelman.shadow" version "5.2.0"
+	id "org.mikeneck.graalvm-native-image" version "0.3.0"
 	id "org.flywaydb.flyway" version "6.0.8"
 }
 
@@ -14,7 +14,7 @@ allprojects {
 	targetCompatibility = JavaVersion.VERSION_11
 }
 
-mainClassName = "com.mageddo.micronaut.Application"
+def mainClassName = "com.mageddo.micronaut.Application"
 
 task debug(type: JavaExec){
 	debug = true
@@ -22,13 +22,14 @@ task debug(type: JavaExec){
 	main = mainClassName
 }
 
-graal {
-	mainClass mainClassName
-	graalVersion(graalVMVersion)
-	downloadBaseUrl("https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz#")
-	outputName(project.name)
-	option("-J-Xmx5G")
-	option("--no-server")
+nativeImage {
+	graalVmHome = System.getProperty("java.home")
+	mainClass = mainClassName
+	executableName = rootProject.name
+	arguments(
+		"--no-server",
+		"-J-Xmx5G"
+	)
 }
 
 flyway {
@@ -42,6 +43,7 @@ flyway {
 configurations {
 	compile.exclude module: 'spring-jcl'
 }
+
 dependencies {
 
 	compileOnly 'org.projectlombok:lombok:1.18.10'
@@ -119,18 +121,19 @@ project(":test-commons"){
 	}
 }
 
-task copyToLib(type: Copy) {
-	into "$buildDir/libs/lib"
-	from configurations.runtime
+jar {
+	manifest {
+		attributes "Main-Class": mainClassName
+	}
 }
 
-task fatJar(type: Jar, dependsOn: copyToLib) {
-	archiveBaseName = "${project.name}-all"
-	manifest {
-		attributes(
-			'Main-Class': mainClassName,
-			'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
-		)
+shadowJar {
+	mergeServiceFiles()
+	append 'META-INF/spring.handlers'
+	append 'META-INF/spring.schemas'
+	append 'META-INF/spring.tooling'
+	transform(com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer) {
+		paths = ['META-INF/spring.factories' ]
+		mergeStrategy = "append"
 	}
-	with jar
 }
