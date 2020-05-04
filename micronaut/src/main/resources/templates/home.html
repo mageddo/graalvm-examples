@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
-<html th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="layoutFile :: layout(
+		title=~{::title}, headerScripts=~{::headerScripts}, content=~{::section}, footerScripts=~{::footerScripts}
+	)"
+>
 <head>
-	<title>Home</title>
-	<div th:fragment="headerScripts">
-		<script src="/static/script.js"></script>
-	</div>
+	<title>Hello World</title>
+	<headerScripts>
+		<script th:src="@{/static/script.js}"></script>
+	</headerScripts>
 </head>
 <body>
-<section>
+<section >
 	<h1 th:if="${loggedIn}">username: <span th:text="${username}"></span></h1>
 	<h1 th:unless="${loggedIn}">You are not logged in</h1>
 	<p class="red-color">If this text is red then static resources are working</p>
 	<code></code>
 </section>
+<footerScripts>
+	<script th:src="@{/static/script.js}"></script>
+</footerScripts>
 </body>
 </html>

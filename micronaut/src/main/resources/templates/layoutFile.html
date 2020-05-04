@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.thymeleaf.org"
-	th:fragment="layout (title, content)"
+	th:fragment="layout(title, headerScripts, content)"
+	th:with="footerScripts=${footerScripts} ?: ''"
 >
 <head>
-	<title th:replace="${title}">Layout Title</title>
-	<link rel="stylesheet" type="text/css" href="/static/foo.css" />
-	<script src="/static/jquery-3.5.0.min.js"></script>
-	<div layout:fragment="headerScripts" />
+	<title th:replace="${title}"></title>
+	<link rel="stylesheet" type="text/css" th:href="@{/static/foo.css}" />
+	<script th:src="@{/static/jquery-3.5.0.min.js}"></script>
+	<div th:include="${headerScripts}" th:remove="tag" />
 </head>
 <body>
 <h1>Layout H1</h1>
@@ -18,6 +18,6 @@
 <footer>
 	Layout footer
 </footer>
-	<div layout:fragment="footerScripts" />
+<div th:include="${footerScripts}" th:remove="tag" ></div>
 </body>
 </html>
