@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	th:fragment="layout(title, headerScripts, content)"
-	th:with="footerScripts=${footerScripts} ?: ''"
+	th:with="footerScripts=${footerScripts} ?: null"
 >
 <head>
 	<title th:replace="${title}"></title>
@@ -18,6 +18,8 @@
 <footer>
 	Layout footer
 </footer>
-<div th:include="${footerScripts}" th:remove="tag" ></div>
+<div th:if="${footerScripts != null}"  th:remove="tag" >
+	<div th:include="${footerScripts}" th:remove="tag" ></div>
+</div>
 </body>
 </html>
