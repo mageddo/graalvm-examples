@@ -9,14 +9,14 @@ allprojects {
 	repositories {
 		mavenCentral()
 	}
-	apply plugin: 'java'
+	apply plugin: "java"
 	sourceCompatibility = JavaVersion.VERSION_11
 	targetCompatibility = JavaVersion.VERSION_11
 }
 
 def mainClassName = "com.mageddo.micronaut.Application"
 
-task debug(type: JavaExec){
+task debug(type: JavaExec) {
 	debug = true
 	classpath = sourceSets.main.runtimeClasspath
 	main = mainClassName
@@ -37,88 +37,73 @@ flyway {
 	user = "root"
 	password = "root"
 	validateOnMigrate = false
-	locations = ['filesystem:src/main/resources/db/migrations']
+	locations = ["filesystem:src/main/resources/db/migrations"]
 }
 
 configurations {
-	compile.exclude module: 'spring-jcl'
+	compile.exclude module: "spring-jcl"
 }
 
 dependencies {
 
-	compileOnly 'org.projectlombok:lombok:1.18.10'
-	annotationProcessor 'org.projectlombok:lombok:1.18.10'
-
+	compileOnly "org.projectlombok:lombok:1.18.10"
+	annotationProcessor "org.projectlombok:lombok:1.18.10"
 	compileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
 	annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
 
-	compile ("com.zaxxer:HikariCP:3.3.1")
-	compile ("org.postgresql:postgresql:42.2.5")
+	compile("com.zaxxer:HikariCP:3.3.1")
+	compile("org.postgresql:postgresql:42.2.5")
 
-	compile ("org.springframework:spring-jdbc:5.1.5.RELEASE")
-	compile ("io.micronaut:micronaut-spring:${micronautVersion}")
+	annotationProcessor platform("io.micronaut:micronaut-bom:${micronautVersion}")
+	implementation platform("io.micronaut:micronaut-bom:${micronautVersion}")
+	annotationProcessor("io.micronaut:micronaut-validation")
+
+	compile("org.springframework:spring-jdbc:5.1.5.RELEASE")
+	compile("io.micronaut:micronaut-spring")
 //	compile ("io.micronaut.configuration:micronaut-jdbc-hikari:1.2.3")
+	compile("io.micronaut:micronaut-validation")
+	compile("io.micronaut:micronaut-http-server-netty")
+	compile("io.micronaut:micronaut-runtime")
 
-	annotationProcessor "io.micronaut:micronaut-validation:${micronautVersion}"
-	compile "io.micronaut:micronaut-validation:${micronautVersion}"
-	compile "io.micronaut:micronaut-http-client:${micronautVersion}"
-	compile "io.micronaut:micronaut-http-server-netty:${micronautVersion}"
-	compile "io.micronaut:micronaut-runtime:${micronautVersion}"
-
-	compileOnly "io.micronaut:micronaut-inject-java:${micronautVersion}"
-	annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
-	compile "io.micronaut:micronaut-inject:${micronautVersion}"
-	compile ("io.micronaut:micronaut-views-thymeleaf:1.2.0")
-	compile ("io.micronaut:micronaut-management:${micronautVersion}")
+	annotationProcessor("io.micronaut:micronaut-inject-java")
+	compileOnly("io.micronaut:micronaut-inject-java")
+	compile("io.micronaut:micronaut-inject")
+	compile("io.micronaut:micronaut-views-thymeleaf")
+	compile("io.micronaut:micronaut-management")
 
 	compile("com.mageddo:commons:1.5.0")
-	compile ("ch.qos.logback:logback-classic:1.2.3")
+	compile("ch.qos.logback:logback-classic:1.2.3")
 
 //	tag::graal[]
-	annotationProcessor "io.micronaut:micronaut-graal:${micronautVersion}"
+	annotationProcessor("io.micronaut:micronaut-graal")
 	compileOnly("com.oracle.substratevm:svm:19.2.1")
-	compile ("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
-	compile ("commons-logging:commons-logging:1.2")
-
+	compile("org.graalvm.sdk:graal-sdk:${graalVMVersion}")
+	compile("commons-logging:commons-logging:1.2")
 	//end::graal[]
 
-	testCompileOnly 'org.projectlombok:lombok:1.18.10'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
+	testCompileOnly "org.projectlombok:lombok:1.18.10"
+	testAnnotationProcessor "org.projectlombok:lombok:1.18.10"
 
 	testCompileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
 	testAnnotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
 
-	testAnnotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
-
-	testCompile(project(":test-commons"))
+	testAnnotationProcessor platform("io.micronaut:micronaut-bom:${micronautVersion}")
+	testImplementation platform("io.micronaut:micronaut-bom:${micronautVersion}")
+	testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+	testCompileOnly("io.micronaut:micronaut-inject-java")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+	testImplementation("org.mockito:mockito-junit-jupiter:3.1.0")
+	testImplementation("io.rest-assured:rest-assured:4.1.2")
+	testImplementation("io.micronaut.test:micronaut-test-junit5:1.1.2")
+	testImplementation("io.micronaut.configuration:micronaut-flyway:1.1.0")
+	testImplementation("io.zonky.test:embedded-postgres:1.2.5")
+	testImplementation("io.zonky.test.postgres:embedded-postgres-binaries-bom:11.6.0")
+	testImplementation("org.springframework:spring-jdbc:5.1.5.RELEASE")
 
 }
 
 test {
 	useJUnitPlatform()
-}
-
-project(":test-commons"){
-	dependencies {
-
-		compileOnly 'org.projectlombok:lombok:1.18.10'
-		annotationProcessor 'org.projectlombok:lombok:1.18.10'
-
-		compileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
-		annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
-
-		annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
-
-		compile "org.junit.jupiter:junit-jupiter:5.4.2"
-		compile "org.mockito:mockito-junit-jupiter:3.1.0"
-		compile "io.rest-assured:rest-assured:4.1.2"
-		compile "io.micronaut.test:micronaut-test-junit5:1.1.2"
-		compile "io.micronaut.configuration:micronaut-flyway:1.1.0"
-		compile "io.zonky.test:embedded-postgres:1.2.5"
-		compile 'io.zonky.test.postgres:embedded-postgres-binaries-bom:11.6.0'
-		compile "io.micronaut:micronaut-inject-java:${micronautVersion}"
-		compileOnly ("org.springframework:spring-jdbc:5.1.5.RELEASE")
-	}
 }
 
 jar {
@@ -129,11 +114,11 @@ jar {
 
 shadowJar {
 	mergeServiceFiles()
-	append 'META-INF/spring.handlers'
-	append 'META-INF/spring.schemas'
-	append 'META-INF/spring.tooling'
+	append "META-INF/spring.handlers"
+	append "META-INF/spring.schemas"
+	append "META-INF/spring.tooling"
 	transform(com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer) {
-		paths = ['META-INF/spring.factories' ]
+		paths = ["META-INF/spring.factories"]
 		mergeStrategy = "append"
 	}
 }

@@ -1,7 +1,7 @@
 package com.mageddo.micronaut.service;
 
-import com.mageddo.tests.DatabaseConfigurator;
-import com.mageddo.tests.DatabaseConfiguratorExtension;
+import com.mageddo.micronaut.commons.DatabaseConfigurator;
+import com.mageddo.micronaut.commons.DatabaseConfiguratorExtension;
 import io.micronaut.test.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

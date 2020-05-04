@@ -1,8 +1,8 @@
 package com.mageddo.micronaut;
 
 import com.mageddo.micronaut.service.FruitsService;
-import com.mageddo.tests.DatabaseConfigurator;
-import com.mageddo.tests.DatabaseConfiguratorExtension;
+import com.mageddo.micronaut.commons.DatabaseConfigurator;
+import com.mageddo.micronaut.commons.DatabaseConfiguratorExtension;
 import io.micronaut.test.annotation.MicronautTest;
 import lombok.Cleanup;
 import lombok.SneakyThrows;

@@ -1,4 +1,4 @@
-package com.mageddo.tests;
+package com.mageddo.micronaut.commons;
 
 import io.micronaut.core.io.IOUtils;
 import lombok.SneakyThrows;
