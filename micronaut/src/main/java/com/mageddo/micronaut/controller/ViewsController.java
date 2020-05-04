@@ -15,13 +15,13 @@ public class ViewsController {
 	@Get
 	@View("home")
 	public HttpResponse index() {
-		return ok(mapOf("loggedIn", true, "username", "Johnny Cash"));
+		return ok(mapOf("loggedIn", true, "username", "Elvis"));
 	}
 
-	@Get("/modelAndView")
-	ModelAndView modelAndView() {
+	@Get("/logout")
+	ModelAndView logout() {
 		return new ModelAndView<>(
-			"home",  mapOf("name", "Elvis")
+			"home",  mapOf("username", "Anonymous")
 		);
 	}
 

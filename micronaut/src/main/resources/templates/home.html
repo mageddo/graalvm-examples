@@ -14,10 +14,19 @@
 </head>
 <body>
 <section >
-	<h1 th:if="${loggedIn}">username: <span th:text="${username}"></span></h1>
-	<h1 th:unless="${loggedIn}">You are not logged in</h1>
-	<p class="red-color">If this text is red, then static resources are working</p>
-	<code>Loading fruits...</code>
+	<div th:if="${loggedIn}">
+		<h2>
+			username:
+			<span th:text="${username}" th:remove="tag"></span>
+			| <a th:href="@{/logout}">logout</a>
+		</h2>
+		<p class="red-color">If this text is red, then static resources are working</p>
+		<code>Loading fruits...</code>
+	</div>
+	<div th:unless="${loggedIn}">
+		<h2>You are not logged in</h2>
+		<p><a th:href="@{/}" >Log In</a>
+	</div>
 </section>
 </body>
 </html>
