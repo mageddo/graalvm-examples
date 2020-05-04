@@ -4,7 +4,9 @@ import com.mageddo.micronaut.config.ApplicationContextUtils;
 import io.micronaut.runtime.Micronaut;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
+import nativeimage.Reflection;
 
+@Reflection(declaredConstructors = true, declaredMethods = true, scanPackage = "com.mageddo.micronaut.entity")
 public class Application {
 
 	public static void main(String[] args) {
