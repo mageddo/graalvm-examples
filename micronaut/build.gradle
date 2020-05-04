@@ -39,6 +39,7 @@ flyway {
 	password = "root"
 	validateOnMigrate = false
 	locations = ["filesystem:src/main/resources/db/migrations"]
+	schemas = ["micronaut"]
 }
 
 configurations {
