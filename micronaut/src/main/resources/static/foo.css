@@ -1,3 +1,14 @@
 .red-color {
 	color: red;
 }
+
+code {
+	display: inline-block;
+	margin: 5px 10px;
+	padding: 5px 10px;
+	border: 1px solid #CCCCCC;
+}
+
+footer {
+	text-align: center;
+}

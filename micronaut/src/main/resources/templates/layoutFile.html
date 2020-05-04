@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	th:fragment="layout(title, headerScripts, content)"
-	th:with="footerScripts=${footerScripts} ?: null"
+			xmlns:th="http://www.thymeleaf.org"
+			th:fragment="layout(title, headerScripts, content)"
+			th:with="footerScripts=${footerScripts} ?: null"
 >
 <head>
 	<title th:replace="${title}"></title>
-	<link rel="stylesheet" type="text/css" th:href="@{/static/foo.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/static/foo.css}"/>
 	<script th:src="@{/static/jquery-3.5.0.min.js}"></script>
-	<div th:include="${headerScripts}" th:remove="tag" />
+	<div th:include="${headerScripts}" th:remove="tag"/>
 </head>
 <body>
-<h1>Layout H1</h1>
+<h1>Micronaut views are working!</h1>
 <div th:replace="${content}">
 	<p>Layout content</p>
 </div>
 <footer>
-	Layout footer
+	Under <a href="https://www.apache.org/licenses/LICENSE-2.0"> APACHE LICENSE, VERSION 2.0</a>
 </footer>
-<div th:if="${footerScripts != null}"  th:remove="tag" >
-	<div th:include="${footerScripts}" th:remove="tag" ></div>
+<div th:if="${footerScripts != null}" th:remove="tag">
+	<div th:include="${footerScripts}" th:remove="tag"/>
 </div>
 </body>
 </html>
