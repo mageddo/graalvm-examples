@@ -8,30 +8,44 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.inject.Inject;
-import java.util.List;
 
-import static io.micronaut.core.util.CollectionUtils.mapOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@MicronautTest(environments = "test")
+@MicronautTest(environments = "test", transactional = false)
 @ExtendWith({DatabaseConfiguratorExtension.class})
 class FruitsServiceTest {
 
 	@Inject
 	private DatabaseConfigurator databaseConfigurator;
 
+	@Inject
+	private FruitsService fruitsService;
+
+	@Test
+	void shouldFindFruitsAndRegisterTrace(){
+		// arrange
+
+		// act
+		final var fruits = this.fruitsService.getFruits();
+
+		// assert
+		assertEquals(5, fruits.size());
+		assertEquals(1, this.fruitsService.countTraces());
+	}
+
 	@Test
 	void mustFind2FruitsTraces(){
 
 		// arrange
-		databaseConfigurator.execute("/fruits-service-test/001.sql");
+
+		this.databaseConfigurator.execute("/fruits-service-test/001.sql");
 
 		// act
-		final List fruits = databaseConfigurator.getJdbcTemplate().queryForList("SELECT * FROM FRUITS_TRACE", mapOf());
+		final int traces = this.fruitsService.countTraces();
 
 		// assert
-		assertEquals(2, fruits.size());
+		assertEquals(2, traces);
 
 	}
 

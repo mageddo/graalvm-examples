@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.get;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 @TestInstance(Lifecycle.PER_CLASS)
-@MicronautTest(environments = "test")
+@MicronautTest(environments = "test", transactional = false)
 class FruitsControllerTest {
 
 	@Test

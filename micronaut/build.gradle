@@ -16,6 +16,11 @@ allprojects {
 
 def mainClassName = "com.mageddo.micronaut.Application"
 
+task run(type: JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath
+	main = mainClassName
+}
+
 task debug(type: JavaExec) {
 	debug = true
 	classpath = sourceSets.main.runtimeClasspath
@@ -58,9 +63,9 @@ dependencies {
 	implementation platform("io.micronaut:micronaut-bom:${micronautVersion}")
 	annotationProcessor("io.micronaut:micronaut-validation")
 
-	compile("org.springframework:spring-jdbc:5.1.5.RELEASE")
+//	compile("io.micronaut.configuration:micronaut-jdbc-hikari")
 	compile("io.micronaut:micronaut-spring")
-//	compile ("io.micronaut.configuration:micronaut-jdbc-hikari:1.2.3")
+	compile("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	compile("io.micronaut:micronaut-validation")
 	compile("io.micronaut:micronaut-http-server-netty")
 	compile("io.micronaut:micronaut-runtime")
@@ -89,16 +94,18 @@ dependencies {
 
 	testAnnotationProcessor platform("io.micronaut:micronaut-bom:${micronautVersion}")
 	testImplementation platform("io.micronaut:micronaut-bom:${micronautVersion}")
+
+	testAnnotationProcessor("io.micronaut:micronaut-validation")
 	testAnnotationProcessor("io.micronaut:micronaut-inject-java")
 	testCompileOnly("io.micronaut:micronaut-inject-java")
+	testImplementation("io.micronaut.test:micronaut-test-junit5")
+	testImplementation("io.micronaut.configuration:micronaut-flyway")
+
 	testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
 	testImplementation("org.mockito:mockito-junit-jupiter:3.1.0")
 	testImplementation("io.rest-assured:rest-assured:4.1.2")
-	testImplementation("io.micronaut.test:micronaut-test-junit5:1.1.2")
-	testImplementation("io.micronaut.configuration:micronaut-flyway:1.1.0")
 	testImplementation("io.zonky.test:embedded-postgres:1.2.5")
 	testImplementation("io.zonky.test.postgres:embedded-postgres-binaries-bom:11.6.0")
-	testImplementation("org.springframework:spring-jdbc:5.1.5.RELEASE")
 
 }
 

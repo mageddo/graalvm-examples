@@ -8,4 +8,5 @@ import java.util.List;
 public interface FruitsDAO {
 	void traceSelect();
 	List<FruitEntity> getFruits();
+	int countTraces();
 }

@@ -6,7 +6,6 @@ import io.micronaut.spring.tx.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.inject.Singleton;
@@ -19,7 +18,7 @@ public class FruitsService {
 
 	private final FruitsDAO fruitsDAO;
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	@Transactional
 	public List<FruitEntity> getFruits()  {
 		createTrace();
 		for (int i = 1; i <= 4; i++) {
@@ -34,6 +33,9 @@ public class FruitsService {
 		throw new IllegalStateException("rollback");
 	}
 
+	public int countTraces(){
+		return fruitsDAO.countTraces();
+	}
 
 	@Transactional
 	public void createTrace() {

@@ -46,6 +46,7 @@ public class JdbcTemplateFactory {
 //		dc.setIdleTimeout();
 		dc.setPassword(config.getPassword());
 		dc.setUsername(config.getUsername());
+		dc.setPoolName("Elvis Pool");
 //		dc.setSchema();
 		return dc;
 	}

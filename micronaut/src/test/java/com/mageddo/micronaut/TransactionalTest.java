@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@MicronautTest(environments = "test")
+@MicronautTest(environments = "test", transactional = false)
 @ExtendWith({DatabaseConfiguratorExtension.class})
 class TransactionalTest {
 

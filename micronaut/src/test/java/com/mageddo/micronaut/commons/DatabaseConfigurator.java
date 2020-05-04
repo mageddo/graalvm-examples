@@ -18,7 +18,7 @@ public class DatabaseConfigurator {
 	private final NamedParameterJdbcTemplate namedJdbcTemplate;
 
 	public void execute(String sqlFile){
-		namedJdbcTemplate.update(TestUtils.getResourceAsString(sqlFile), CollectionUtils.mapOf());
+		this.namedJdbcTemplate.update(TestUtils.getResourceAsString(sqlFile), CollectionUtils.mapOf());
 	}
 
 	public void truncateTables() {
