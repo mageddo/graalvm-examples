@@ -33,7 +33,7 @@ nativeImage {
 	executableName = rootProject.name
 	arguments(
 		"--no-server",
-		"-J-Xmx5G"
+		"-J-Xmx7G"
 	)
 }
 
@@ -56,14 +56,13 @@ dependencies {
 	compileOnly("com.mageddo.lombok:lombok-ext:2.3.3")
 	annotationProcessor("com.mageddo.lombok:lombok-ext:2.3.3")
 
-	compile("com.zaxxer:HikariCP:3.3.1")
 	compile("org.postgresql:postgresql:42.2.5")
 
 	annotationProcessor platform("io.micronaut:micronaut-bom:${micronautVersion}")
 	implementation platform("io.micronaut:micronaut-bom:${micronautVersion}")
 	annotationProcessor("io.micronaut:micronaut-validation")
 
-//	compile("io.micronaut.configuration:micronaut-jdbc-hikari")
+	compile("io.micronaut.configuration:micronaut-jdbc-hikari")
 	compile("io.micronaut:micronaut-spring")
 	compile("org.springframework:spring-jdbc:5.1.5.RELEASE")
 	compile("io.micronaut:micronaut-validation")
@@ -121,11 +120,4 @@ jar {
 
 shadowJar {
 	mergeServiceFiles()
-	append "META-INF/spring.handlers"
-	append "META-INF/spring.schemas"
-	append "META-INF/spring.tooling"
-	transform(com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer) {
-		paths = ["META-INF/spring.factories"]
-		mergeStrategy = "append"
-	}
 }
