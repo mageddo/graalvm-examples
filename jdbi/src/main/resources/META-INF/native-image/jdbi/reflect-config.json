@@ -1,0 +1,85 @@
+[
+  {
+    "name": "org.jdbi.v3.core.Handles",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.argument.Arguments",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.jdbi.v3.core.config.ConfigRegistry"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.argument.internal.strategies.LoggableBinderArgument",
+    "methods": [
+      {
+        "name": "toString",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.config.JdbiCaches",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.mapper.ColumnMappers",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.mapper.RowMappers",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.qualifier.Qualifiers",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.statement.SqlStatements",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.statement.StatementExceptions",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  }
+]
