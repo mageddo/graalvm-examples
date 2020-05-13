@@ -1,0 +1,170 @@
+[
+  {
+    "name": "com.mageddo.jdbi.StockPriceDaoSqlObject",
+    "allDeclaredMethods": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.mageddo.jdbi.StockRowMapper",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.collector.JdbiCollectors",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.extension.Extensions",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.internal.OnDemandExtensions",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.mapper.Mappers",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.HandlerDecorators",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.SqlObject",
+    "methods": [
+      {
+        "name": "getHandle",
+        "parameterTypes": []
+      },
+      {
+        "name": "withHandle",
+        "parameterTypes": [
+          "org.jdbi.v3.core.HandleCallback"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.SqlObjects",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.config.internal.RegisterRowMapperImpl",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.statement.internal.SqlObjectStatementConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.statement.internal.SqlQueryHandler",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "java.lang.Class",
+          "java.lang.reflect.Method"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "sun.misc.Unsafe",
+    "fields": [
+      {
+        "name": "theUnsafe"
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.Handlers",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "java.lang.Object",
+    "methods": [
+      {
+        "name": "equals",
+        "parameterTypes": [
+          "java.lang.Object"
+        ]
+      },
+      {
+        "name": "hashCode",
+        "parameterTypes": []
+      },
+      {
+        "name": "toString",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.core.mapper.reflect.internal.PojoTypes",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.config.RegisterRowMapper",
+    "allDeclaredMethods":true,
+    "allPublicMethods":true
+  },
+  {
+    "name": "org.jdbi.v3.sqlobject.config.RegisterRowMappers",
+    "allDeclaredMethods":true,
+    "allPublicMethods":true
+  }
+]

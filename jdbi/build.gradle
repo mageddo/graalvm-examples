@@ -13,7 +13,7 @@ dependencies {
   implementation platform("org.jdbi:jdbi3-bom:3.13.0")
   implementation("org.jdbi:jdbi3-core")
   implementation("org.postgresql:postgresql:42.2.5")
-//  implementation("ch.qos.logback:logback-classic:1.2.3")
+  implementation("org.jdbi:jdbi3-sqlobject")
   implementation("org.slf4j:slf4j-simple:1.7.30")
 
 }
