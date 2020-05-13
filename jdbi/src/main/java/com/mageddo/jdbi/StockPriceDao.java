@@ -13,4 +13,6 @@ public interface StockPriceDao {
   List<Stock> find();
 
   void createTable();
+
+  void truncate();
 }

@@ -24,4 +24,12 @@ public class Stock {
     this.price = price;
     return this;
   }
+
+  @Override
+  public String toString() {
+    return "Stock(" +
+        "symbol=" + symbol +
+        ", price=" + price +
+        ')';
+  }
 }

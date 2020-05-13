@@ -78,4 +78,9 @@ public class StockPriceDaoPostgres implements StockPriceDao {
       handle.execute(sql);
     });
   }
+
+  @Override
+  public void truncate() {
+    this.jdbi.useHandle(handle -> handle.execute("DELETE FROM STOCK"));
+  }
 }
