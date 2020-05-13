@@ -98,5 +98,10 @@
         "allowUnsafeAccess": true
       }
     ]
+  },
+  {
+    "name": "com.github.benmanes.caffeine.cache.CacheLoader",
+    "allDeclaredMethods" : true,
+    "allPublicMethods" : true
   }
 ]

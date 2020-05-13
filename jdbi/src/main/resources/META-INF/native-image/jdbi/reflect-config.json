@@ -81,5 +81,8 @@
         "parameterTypes": []
       }
     ]
+  },
+  {
+    "name": "org.jdbi.v3.core.qualifier.NVarchar"
   }
 ]
