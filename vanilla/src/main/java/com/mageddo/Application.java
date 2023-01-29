@@ -1,37 +1,22 @@
 package com.mageddo;
 
-import org.apache.commons.lang3.time.StopWatch;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.mageddo.entrypoint.FruitResource;
+import lombok.extern.slf4j.Slf4j;
+import nativeimage.Reflection;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
+@Slf4j
+@Reflection(declaredConstructors = true, declaredMethods = true, scanPackage = "com.mageddo.entrypoint")
 public class Application {
 
-	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+  public static void main(String[] args) throws Exception {
 
-	public static void main(String[] args) throws Exception {
-		LOG.info("Hello World!!!");
-	}
+    final var fruits = new FruitResource().get();
+    final var fruitsJson = new ObjectMapper()
+      .enable(SerializationFeature.INDENT_OUTPUT)
+      .writeValueAsString(fruits);
 
-	private static void fileReadingPerformanceCheck() throws IOException {
-		StopWatch stopWatch = new StopWatch();
-		stopWatch.start();
-		Runtime.getRuntime().exec("truncate --size 4G /tmp/file");
-		try(final InputStream in = Files.newInputStream(Paths.get("/tmp/file"));){
-			final byte[] buff = new byte[8124];
-			int i = 0;
-			while (in.read(buff) != -1){
-				i++;
-				int x = 5 * buff[0];
-				if(i % 100000 == 0){
-					LOG.info("i={}", i);
-				}
-			}
-		}
-		LOG.info("done time={}", stopWatch.getTime());
-	}
+    log.info("status=someFruits, fruits={}", fruitsJson);
+  }
 }
