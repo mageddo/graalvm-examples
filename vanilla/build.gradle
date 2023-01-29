@@ -53,7 +53,8 @@ graalvmNative {
       fallback = false
 //      buildArgs.add('--no-server')
 //      buildArgs.add('-H:+DashboardAll')
-      buildArgs.add('-H:+PrintUniverse')
+//      buildArgs.add('-H:+PrintUniverse')
+      buildArgs.add("--initialize-at-build-time=${className}")
       buildArgs.add('-J-Xmx5G')
     }
   }
