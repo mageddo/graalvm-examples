@@ -69,16 +69,3 @@ dependencies {
   testImplementation "junit:junit:4.12"
 
 }
-
-task fatJar(type: Jar) {
-  archiveBaseName = project.name + '-all'
-  manifest {
-    attributes(
-      'Main-Class': className,
-      'Class-Path': configurations.compileClasspath.collect { "lib/${it.name}" }.join(' ')
-    )
-  }
-  from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-  with jar
-}
-

@@ -1,10 +1,10 @@
 package com.mageddo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.mageddo.entrypoint.FruitResource;
 import lombok.extern.slf4j.Slf4j;
 import nativeimage.Reflection;
+
+import java.net.InetSocketAddress;
+import java.nio.file.Path;
 
 @Slf4j
 @Reflection(declaredConstructors = true, declaredMethods = true, scanPackage = "com.mageddo.entrypoint")
@@ -12,11 +12,22 @@ public class Application {
 
   public static void main(String[] args) throws Exception {
 
-    final var fruits = new FruitResource().get();
-    final var fruitsJson = new ObjectMapper()
-      .enable(SerializationFeature.INDENT_OUTPUT)
-      .writeValueAsString(fruits);
+    var port = 8000;
+    var rootDirectory = Path.of("C:/Users/Mahozad/Desktop/");
+    var outputLevel = OutputLevel.VERBOSE;
+    var server = SimpleFileServer.createFileServer(
+      new InetSocketAddress(port),
+      rootDirectory,
+      outputLevel
+    );
+    server.start();
 
-    log.info("status=someFruits, fruits={}", fruitsJson);
+
+//    final var fruits = new FruitResource().get();
+//    final var fruitsJson = new ObjectMapper()
+//      .enable(SerializationFeature.INDENT_OUTPUT)
+//      .writeValueAsString(fruits);
+//
+//    log.info("status=someFruits, fruits={}", fruitsJson);
   }
 }
