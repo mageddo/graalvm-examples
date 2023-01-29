@@ -16,8 +16,8 @@ repositories {
   maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 def className = "com.mageddo.Application"
 
@@ -51,14 +51,21 @@ graal {
 
 dependencies {
 
+  compileOnly 'org.projectlombok:lombok:1.18.24'
+  annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
   implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+
+  testCompileOnly 'org.projectlombok:lombok:1.18.24'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
   implementation  "ch.qos.logback:logback-classic:1.2.3"
   testImplementation "junit:junit:4.12"
 
 }
 
 task fatJar(type: Jar) {
-  baseName = project.name + '-all'
+  archiveBaseName = project.name + '-all'
   manifest {
     attributes(
       'Main-Class': className,
