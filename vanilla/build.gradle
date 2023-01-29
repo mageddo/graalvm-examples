@@ -16,8 +16,8 @@ repositories {
   maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
-sourceCompatibility = JavaVersion.VERSION_19
-targetCompatibility = JavaVersion.VERSION_19
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 def className = "com.mageddo.Application"
 
@@ -38,15 +38,17 @@ graalvmNative {
     main {
       javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(19)
+        requiredVersion = '22.3'
         vendor = JvmVendorSpec.matching("GraalVM Community")
       }
 
       // Main options
       imageName = project.name
       mainClass = className
-      debug = true
-      verbose = true
-      buildArgs.add('--no-server')
+//      debug = true
+//      verbose = true
+//      buildArgs.add('--no-server')
+      buildArgs.add('-H:+DashboardAll')
       buildArgs.add('-J-Xmx5G')
     }
   }
