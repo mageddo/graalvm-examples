@@ -1,71 +1,71 @@
 buildscript {
-	repositories {
-		mavenLocal()
-		jcenter()
-	}
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
 }
 plugins {
-	id "java"
-	id "com.palantir.graal" version "0.4.0"
-	id "com.mageddo.graal-reflection-configuration-generator" version "2.0.1"
+  id "java"
+  id "com.palantir.graal" version "0.4.0"
+  id "com.mageddo.graal-reflection-configuration-generator" version "2.0.1"
 }
 
 repositories {
-	mavenLocal()
-	jcenter()
-	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+  mavenLocal()
+  jcenter()
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-def className =  "com.mageddo.Application"
+def className = "com.mageddo.Application"
 
-task debug(type: JavaExec){
-	debug = true
-	classpath = sourceSets.main.runtimeClasspath
-	main = className
+task debug(type: JavaExec) {
+  debug = true
+  classpath = sourceSets.main.runtimeClasspath
+  main = className
 }
 
-task run(type: JavaExec){
-	classpath = sourceSets.main.runtimeClasspath
-	main = className
+task run(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  main = className
 }
 
 graal {
-	mainClass className
-	graalVersion(graalVMVersion)
-	outputName(project.name)
-	option("-H:IncludeResources=.*.yml")
-	option("--allow-incomplete-classpath")
-	option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json")
-	option("-H:+AllowVMInspection")
-	option("-H:+ReportUnsupportedElementsAtRuntime")
-	option("-H:EnableURLProtocols=http,https")
-	option("--enable-all-security-services")
-	option("-Dfile.encoding=UTF-8")
-	option("--no-server")
-	option("-J-Xmx5G")
+  mainClass className
+  graalVersion(graalVMVersion)
+  outputName(project.name)
+  option("-H:IncludeResources=.*.yml")
+  option("--allow-incomplete-classpath")
+  option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json")
+  option("-H:+AllowVMInspection")
+  option("-H:+ReportUnsupportedElementsAtRuntime")
+  option("-H:EnableURLProtocols=http,https")
+  option("--enable-all-security-services")
+  option("-Dfile.encoding=UTF-8")
+  option("--no-server")
+  option("-J-Xmx5G")
 }
 
 dependencies {
 
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
-	compile "ch.qos.logback:logback-classic:1.2.3"
-	testCompile "junit:junit:4.12"
+  implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+  implementation  "ch.qos.logback:logback-classic:1.2.3"
+  testImplementation "junit:junit:4.12"
 
 }
 
 task fatJar(type: Jar) {
-	baseName = project.name + '-all'
-	manifest {
-		attributes (
-			'Main-Class': className,
-			'Class-Path': configurations.compile.collect { "lib/${it.name}" }.join(' ')
-		)
-	}
-	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	with jar
+  baseName = project.name + '-all'
+  manifest {
+    attributes(
+      'Main-Class': className,
+      'Class-Path': configurations.compileClasspath.collect { "lib/${it.name}" }.join(' ')
+    )
+  }
+  from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+  with jar
 }
 
 nativeImage.dependsOn(tasks.reflectConfigFiles)
