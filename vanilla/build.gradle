@@ -6,7 +6,7 @@ buildscript {
 }
 plugins {
   id "java"
-  id "com.palantir.graal" version "0.4.0"
+  id "com.palantir.graal" version "0.12.0"
   id "com.mageddo.graal-reflection-configuration-generator" version "2.0.1"
 }
 
@@ -36,6 +36,7 @@ graal {
   mainClass className
   graalVersion(graalVMVersion)
   outputName(project.name)
+  javaVersion("17")
   option("-H:IncludeResources=.*.yml")
   option("--allow-incomplete-classpath")
   option("-H:ReflectionConfigurationFiles=${project.buildDir}/reflect.json")
