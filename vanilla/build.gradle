@@ -34,9 +34,6 @@ task run(type: JavaExec) {
 
 // https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
 graalvmNative {
-  agent {
-//    trackReflectionMetadata = false
-  }
   binaries {
     main {
       javaLauncher = javaToolchains.launcherFor {
@@ -51,10 +48,6 @@ graalvmNative {
 //      debug = true
       verbose = true
       fallback = false
-//      buildArgs.add('--no-server')
-//      buildArgs.add('-H:+DashboardAll')
-//      buildArgs.add('-H:+PrintUniverse')
-      buildArgs.add("--initialize-at-build-time=${className}")
       buildArgs.add('-J-Xmx5G')
     }
   }
