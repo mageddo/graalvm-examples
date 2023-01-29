@@ -1,32 +1,40 @@
 package com.mageddo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.mageddo.entrypoint.FruitResource;
+import com.sun.net.httpserver.HttpServer;
 import lombok.extern.slf4j.Slf4j;
 import nativeimage.Reflection;
 
 import java.net.InetSocketAddress;
-import java.nio.file.Path;
 
 @Slf4j
 @Reflection(declaredConstructors = true, declaredMethods = true, scanPackage = "com.mageddo.entrypoint")
 public class Application {
 
   public static void main(String[] args) throws Exception {
+    final var objectMapper = new ObjectMapper()
+      .enable(SerializationFeature.INDENT_OUTPUT);
+    final var fruitsResource = new FruitResource();
 
-    var port = 8000;
-    var rootDirectory = Path.of("C:/Users/Mahozad/Desktop/");
-    var outputLevel = OutputLevel.VERBOSE;
-    var server = SimpleFileServer.createFileServer(
-      new InetSocketAddress(port),
-      rootDirectory,
-      outputLevel
+    final var port = new InetSocketAddress(8000);
+
+    log.info("starting.., port={}", port.getPort());
+    final var server = HttpServer.create(
+      port,
+      0,
+      "/",
+      exchange -> {
+        log.info("requestedPath={}", exchange.getRequestURI().getPath());
+        final var msg = objectMapper.writeValueAsBytes(fruitsResource.get());
+        exchange.sendResponseHeaders(200, msg.length);
+        exchange.getResponseBody().write(msg);
+      }
     );
     server.start();
 
 
-//    final var fruits = new FruitResource().get();
-//    final var fruitsJson = new ObjectMapper()
-//      .enable(SerializationFeature.INDENT_OUTPUT)
-//      .writeValueAsString(fruits);
 //
 //    log.info("status=someFruits, fruits={}", fruitsJson);
   }
