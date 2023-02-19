@@ -12,32 +12,20 @@ plugins {
 
 repositories {
   mavenLocal()
-  jcenter()
-  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+  mavenCentral()
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
-def className = "com.mageddo.Application"
-
-task debug(type: JavaExec) {
-  debug = true
-  classpath = sourceSets.main.runtimeClasspath
-  main = className
-}
-
-task run(type: JavaExec) {
-  classpath = sourceSets.main.runtimeClasspath
-  main = className
-}
+def className = "com.mageddo.nativeimage.jna.Main"
 
 // https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
 graalvmNative {
   binaries {
     main {
       javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(19)
+        languageVersion = JavaLanguageVersion.of(11)
         requiredVersion = '22.3'
         vendor = JvmVendorSpec.matching("GraalVM Community")
       }
@@ -57,28 +45,19 @@ dependencies {
 
   compileOnly 'org.projectlombok:lombok:1.18.24'
   annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
   compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
   annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
 
-  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
-  implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+  implementation 'ch.qos.logback:logback-classic:1.2.9'
+  implementation 'org.apache.commons:commons-lang3:3.8.1'
+  implementation 'net.java.dev.jna:jna:5.13.0'
 
   testCompileOnly 'org.projectlombok:lombok:1.18.24'
   testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
-  implementation "ch.qos.logback:logback-classic:1.2.3"
-  testImplementation "junit:junit:4.12"
 
-}
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+  testImplementation 'org.mockito:mockito-junit-jupiter:5.1.1'
 
-task fatJar(type: Jar) {
-  archiveBaseName = project.name + '-all'
-  manifest {
-    attributes(
-      'Main-Class': className,
-      'Class-Path': configurations.compileClasspath.collect { "lib/${it.name}" }.join(' ')
-    )
-  }
-  from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-  with jar
 }
 
