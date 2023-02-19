@@ -17,7 +17,7 @@ public class MountContent extends Structure {
     @Override
     protected List getFieldOrder() {
       List<String> fieds = new ArrayList<>();
-      for (final Field f : MountContent.class.getDeclaredFields()) {
+      for (final var f : MountContent.class.getDeclaredFields()) {
         if (!f.isSynthetic())
           fieds.add(f.getName());
       }

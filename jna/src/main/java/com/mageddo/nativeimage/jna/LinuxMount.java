@@ -1,14 +1,13 @@
 package com.mageddo.nativeimage.jna;
 
+import com.mageddo.nativeimage.jna.struct.MountContent;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
-import com.sun.jna.Structure;
 import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
