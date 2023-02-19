@@ -1,0 +1,10 @@
+version: '3'
+services:
+  debian-9: # debian-9-glibc-2.24
+    build:
+      context: .
+      dockerfile: Dockerfile
+  jdk8: # ldd (Ubuntu GLIBC 2.31-0ubuntu9.9) 2.31
+    build:
+      context: .
+      dockerfile: Dockerfile.java8

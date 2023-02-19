@@ -8,7 +8,10 @@ import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,13 +28,19 @@ public class LinuxMount {
   }
 
   public static List<MountContent> findMounts() {
-    final var mtabPath = "/etc/mtab";
-    final var mountFile = CLibrary.INSTANCE.fopen(mtabPath, "r");
+    final String mtabPath = "/etc/mtab";
+
+    if (!Files.exists(Paths.get(mtabPath))) {
+      System.err.printf("%s don't exists%n", mtabPath);
+      return Collections.emptyList();
+    }
+
+    final Pointer mountFile = CLibrary.INSTANCE.fopen(mtabPath, "r");
     if (mountFile == null) {
       throw new UncheckedIOException(new IOException("File not exists: " + mtabPath));
     }
     MountContent.ByReference mtent;
-    final var mounts = new ArrayList<MountContent>();
+    final List<MountContent> mounts = new ArrayList<>();
     while ((mtent = CLibrary.INSTANCE.getmntent(mountFile)) != null) {
       mounts.add(mtent);
     }

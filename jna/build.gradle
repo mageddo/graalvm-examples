@@ -8,6 +8,7 @@ buildscript {
 plugins {
   id 'java'
   id 'org.graalvm.buildtools.native' version '0.9.19'
+  id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 repositories {
@@ -15,10 +16,10 @@ repositories {
   mavenCentral()
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
-def className = "com.mageddo.nativeimage.jna.Main"
+def mainClassName = "com.mageddo.nativeimage.jna.Main"
 
 // https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
 graalvmNative {
@@ -32,13 +33,29 @@ graalvmNative {
 
       // Main options
       imageName = project.name
-      mainClass = className
+      mainClass = mainClassName
 //      debug = true
       verbose = true
       fallback = false
       buildArgs.add('-J-Xmx5G')
     }
   }
+}
+
+jar {
+  manifest {
+    attributes(
+      "Main-Class": mainClassName
+    )
+  }
+}
+
+shadowJar {
+  mergeServiceFiles()
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
 }
 
 dependencies {
