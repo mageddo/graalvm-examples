@@ -1,5 +1,7 @@
 Working jna with native image sample
 
+GraalVM 22.3 Java 17: Native Image compile and run 
+
 ```bash
 $ ./gradlew build nativeCompile && ./build/native/nativeCompile/graalvm-jna
 
@@ -7,16 +9,14 @@ Aqui começa mais uma história de amor!
 hostname=typer-pc - 0
 ```
 
-Testing jar using Docker
+Java 8: Jar building and running using Docker
 
 ```bash
-$ ./gradlew clean build shadowJar
-$ docker run --rm -v $PWD/build/libs/graalvm-jna-all.jar:/app.jar \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  adoptopenjdk/openjdk8:x86_64-ubuntu-jre8u362-b09 java -jar /app.jar
+$ docker-compose build jdk8 --progress=plain
+$ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker.io/library/jna-jdk8
 ```
 
-Building and running using Docker
+GraalVM 22.3 Java 17: Native Image compile and run using Docker
 
 ```bash
 $ docker-compose build debian-9 --progress=plain

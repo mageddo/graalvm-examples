@@ -9,13 +9,8 @@ RUN tar --strip 1 -zxvf /graalvm/graalvm.tgz -C /graalvm &&\
 ENV JAVA_HOME=/graalvm
 COPY ./ /app
 WORKDIR /app
-RUN #./gradlew build nativeCompile
-RUN ./gradlew build shadowjar
-ENTRYPOINT [ \
-  "/graalvm/bin/java", "-jar", "/app/build/libs/graalvm-jna-all.jar" \
-]
+RUN ./gradlew build nativeCompile
 
-
-#FROM debian:9-slim
-#COPY --from=BULDER /app/build/native/nativeCompile/graalvm-jna /bin/graalvm-jna
-#ENTRYPOINT /bin/graalvm-jna
+FROM debian:9-slim
+COPY --from=BULDER /app/build/native/nativeCompile/graalvm-jna /bin/graalvm-jna
+ENTRYPOINT /bin/graalvm-jna
