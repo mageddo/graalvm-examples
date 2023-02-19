@@ -25,7 +25,7 @@ graalvmNative {
   binaries {
     main {
       javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(17)
         requiredVersion = '22.3'
         vendor = JvmVendorSpec.matching("GraalVM Community")
       }
