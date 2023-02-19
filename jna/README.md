@@ -2,6 +2,9 @@ Working jna with native image sample
 
 ```bash
 $ ./gradlew build nativeCompile && ./build/native/nativeCompile/graalvm-jna
+
+Aqui começa mais uma história de amor!
+hostname=typer-pc - 0
 ```
 
 ## References
