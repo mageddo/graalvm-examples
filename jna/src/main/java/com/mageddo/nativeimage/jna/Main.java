@@ -2,6 +2,7 @@ package com.mageddo.nativeimage.jna;
 
 import com.mageddo.nativeimage.jna.stat.LinuxFiles;
 import com.mageddo.nativeimage.jna.struct.MountContent;
+import com.sun.jna.Platform;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,6 +11,11 @@ import java.nio.file.Paths;
 public class Main {
   public static void main(String[] args) {
     System.out.println("Aqui começa mais uma história de amor!");
+
+    System.out.printf("> Is Linux: %b%n", Platform.isLinux());
+    System.out.printf("> C library name: %s%n", Platform.C_LIBRARY_NAME);
+    System.out.println("-------------------------");
+    System.out.println();
 
     System.out.println("> Hostname Find");
     final String hostname = LinuxMount.findHostname();

@@ -7,11 +7,18 @@ Aqui começa mais uma história de amor!
 hostname=typer-pc - 0
 ```
 
-Testing inside docker
+Testing jar using Docker
 
-```
+```bash
 $ ./gradlew clean build shadowJar
 $ docker run --rm -v $PWD/build/libs/graalvm-jna-all.jar:/app.jar adoptopenjdk/openjdk8:x86_64-ubuntu-jre8u362-b09 java -jar /app.jar
+```
+
+Building and running using Docker
+
+```bash
+$ docker-compose build debian-9 --progress=plain
+$ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock docker.io/library/jna-debian-9
 ```
 
 ## References
