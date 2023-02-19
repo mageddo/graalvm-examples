@@ -7,6 +7,13 @@ Aqui começa mais uma história de amor!
 hostname=typer-pc - 0
 ```
 
+Testing inside docker
+
+```
+$ ./gradlew clean build shadowJar
+$ docker run --rm -v $PWD/build/libs/graalvm-jna-all.jar:/app.jar adoptopenjdk/openjdk8:x86_64-ubuntu-jre8u362-b09 java -jar /app.jar
+```
+
 ## References
 * Credits to [amahfouz1][1]
 * [JNA fails to load with GraalVM throwing JNA: Problems loading core IDs: java.lang.Object][2]

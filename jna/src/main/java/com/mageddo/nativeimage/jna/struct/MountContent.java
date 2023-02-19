@@ -2,6 +2,7 @@ package com.mageddo.nativeimage.jna.struct;
 
 import com.sun.jna.Structure;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class MountContent extends Structure {
     @Override
     protected List getFieldOrder() {
       List<String> fieds = new ArrayList<>();
-      for (final var f : MountContent.class.getDeclaredFields()) {
+      for (final Field f : MountContent.class.getDeclaredFields()) {
         if (!f.isSynthetic())
           fieds.add(f.getName());
       }
