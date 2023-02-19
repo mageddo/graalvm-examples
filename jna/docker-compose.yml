@@ -1,9 +1,5 @@
 version: '3'
 services:
-  debian-9-java: # debian-9-glibc-2.24
-    build:
-      context: .
-      dockerfile: Dockerfile
   debian-9: # debian-9-glibc-2.24
     build:
       context: .
