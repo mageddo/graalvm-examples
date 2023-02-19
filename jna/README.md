@@ -11,7 +11,9 @@ Testing jar using Docker
 
 ```bash
 $ ./gradlew clean build shadowJar
-$ docker run --rm -v $PWD/build/libs/graalvm-jna-all.jar:/app.jar adoptopenjdk/openjdk8:x86_64-ubuntu-jre8u362-b09 java -jar /app.jar
+$ docker run --rm -v $PWD/build/libs/graalvm-jna-all.jar:/app.jar \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  adoptopenjdk/openjdk8:x86_64-ubuntu-jre8u362-b09 java -jar /app.jar
 ```
 
 Building and running using Docker
