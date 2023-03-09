@@ -1,0 +1,80 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
+plugins {
+  id 'java'
+  id 'org.graalvm.buildtools.native' version '0.9.19'
+  id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+def mainClassName = "com.mageddo.nativeimage.jna.Main"
+
+// https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
+graalvmNative {
+  binaries {
+    main {
+      javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        requiredVersion = '22.3'
+        vendor = JvmVendorSpec.matching("GraalVM Community")
+      }
+
+      // Main options
+      imageName = project.name
+      mainClass = mainClassName
+//      debug = true
+      verbose = true
+      fallback = false
+      buildArgs.add('-J-Xmx5G')
+    }
+  }
+}
+
+jar {
+  manifest {
+    attributes(
+      "Main-Class": mainClassName
+    )
+  }
+}
+
+shadowJar {
+  mergeServiceFiles()
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+}
+
+dependencies {
+
+  compileOnly 'org.projectlombok:lombok:1.18.24'
+  annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+  compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
+  annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
+
+  implementation 'ch.qos.logback:logback-classic:1.2.9'
+  implementation 'org.apache.commons:commons-lang3:3.8.1'
+  implementation 'net.java.dev.jna:jna:5.13.0'
+
+  testCompileOnly 'org.projectlombok:lombok:1.18.24'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+  testImplementation 'org.mockito:mockito-junit-jupiter:5.1.1'
+
+}
+
