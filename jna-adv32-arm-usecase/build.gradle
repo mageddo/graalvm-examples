@@ -19,7 +19,7 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-def mainClassName = "com.mageddo.nativeimage.jna.Main"
+def mainClassName = "com.mageddo.adv32_arm_usecase.Main"
 
 // https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
 graalvmNative {
@@ -59,22 +59,7 @@ compileJava {
 }
 
 dependencies {
-
-  compileOnly 'org.projectlombok:lombok:1.18.24'
-  annotationProcessor 'org.projectlombok:lombok:1.18.24'
-
-  compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
-  annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
-
-  implementation 'ch.qos.logback:logback-classic:1.2.9'
-  implementation 'org.apache.commons:commons-lang3:3.8.1'
   implementation 'net.java.dev.jna:jna:5.13.0'
-
-  testCompileOnly 'org.projectlombok:lombok:1.18.24'
-  testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
-
-  testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
-  testImplementation 'org.mockito:mockito-junit-jupiter:5.1.1'
-
+  implementation 'net.java.dev.jna:jna-platform:5.13.0'
 }
 
