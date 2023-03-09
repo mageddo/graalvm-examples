@@ -21,13 +21,21 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 def mainClassName = "com.mageddo.nativeimage.jna.Main"
 
+//tasks.withType(JavaCompile) {
+//  options.compilerArgs += [
+//    "--add-exports", "org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED",
+//    "--add-opens", "org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED"
+//  ]
+//}
+
+
 // https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
 graalvmNative {
   binaries {
     main {
       javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
-        requiredVersion = '22.3'
+//        languageVersion = JavaLanguageVersion.of(17)
+//        requiredVersion = '23.2'
         vendor = JvmVendorSpec.matching("GraalVM Community")
       }
 
@@ -37,7 +45,18 @@ graalvmNative {
 //      debug = true
       verbose = true
       fallback = false
+
       buildArgs.add('-J-Xmx5G')
+//      buildArgs.add('-H:-BuildOutputColorful')
+//      jvmArgs.add('-J-H:-BuildOutputColorful')
+//      buildArgs.add('--add-exports=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED')
+//      buildArgs.add('--add-opens=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED')
+//      buildArgs.add('-J--add-exports=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED')
+//      buildArgs.add('-J--add-opens=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED')
+//      buildArgs.add('--add-exports=org.graalvm.sdk/org.graalvm.nativeimage.impl=ALL-UNNAMED')
+//      jvmArgs.add('--add-exports=org.graalvm.sdk/org.graalvm.nativeimage.impl=ALL-UNNAMED')
+//      jvmArgs.add('--add-opens=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED')
+//      jvmArgs.add('--add-exports=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED')
     }
   }
 }
@@ -65,6 +84,12 @@ dependencies {
 
   compileOnly("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
   annotationProcessor("com.mageddo.nativeimage:reflection-config-generator:2.3.4")
+
+//  compileOnly("com.oracle.substratevm:svm:19.2.1")
+//  implementation group: 'org.graalvm.nativeimage', name: 'svm', version: '21.3.1'
+  implementation 'org.graalvm.nativeimage:svm:22.3.1'
+//  implementation("org.graalvm.sdk:graal-sdk:22.3.1")
+//  compileOnly("com.oracle.substratevm:svm:${graalVMVersion}")
 
   implementation 'ch.qos.logback:logback-classic:1.2.9'
   implementation 'org.apache.commons:commons-lang3:3.8.1'

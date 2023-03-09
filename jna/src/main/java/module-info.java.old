@@ -1,0 +1,5 @@
+//module com.mageddo.nativeimage.jna {
+////  requires java.base;
+////  requires jdk.unsupported;
+//  opens org.graalvm.nativeimage.builder to com.oracle.svm.core.jdk;
+//}
