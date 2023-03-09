@@ -8,11 +8,12 @@ buildscript {
 plugins {
   id 'java'
   id 'org.graalvm.buildtools.native' version '0.9.19'
+  id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 repositories {
   mavenLocal()
-  jcenter()
+  mavenCentral()
   maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
@@ -70,15 +71,14 @@ dependencies {
 
 }
 
-task fatJar(type: Jar) {
-  archiveBaseName = project.name + '-all'
+jar {
   manifest {
     attributes(
-      'Main-Class': className,
-      'Class-Path': configurations.compileClasspath.collect { "lib/${it.name}" }.join(' ')
+      "Main-Class": className
     )
   }
-  from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-  with jar
 }
 
+shadowJar {
+  mergeServiceFiles()
+}
