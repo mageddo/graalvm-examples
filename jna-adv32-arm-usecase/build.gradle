@@ -38,6 +38,7 @@ graalvmNative {
       verbose = true
       fallback = false
       buildArgs.add('-J-Xmx5G')
+//      buildArgs.add('-Djdk.lang.Process.launchMechanism=fork')
     }
   }
 }

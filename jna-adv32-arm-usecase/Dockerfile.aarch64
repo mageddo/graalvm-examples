@@ -1,0 +1,6 @@
+FROM defreitas/tools_graalvm-22.3_java-17_debian-9_aarch64:0.1.3
+COPY ./ app
+WORKDIR /app
+
+ENV JAVA_TOOL_OPTIONS='-Djdk.lang.Process.launchMechanism=fork'
+RUN uname -m && ./gradlew build nativeCompile
