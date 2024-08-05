@@ -1,6 +1,8 @@
 package com.mageddo.entrypoint;
 
 
+import com.mageddo.json.JsonUtils;
+
 import java.util.List;
 
 public class FruitResource {
@@ -18,5 +20,10 @@ public class FruitResource {
         .weight(245.3)
         .build()
     );
+  }
+
+  public String getSerializedAsJson(){
+    final var fruits = this.get();
+    return JsonUtils.writeValueAsString(fruits);
   }
 }
