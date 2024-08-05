@@ -1,6 +1,6 @@
 package com.mageddo;
 
-import com.mageddo.entrypoint.FruitResource;
+import com.mageddo.fruit.FruitResource;
 import com.mageddo.json.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import nativeimage.Reflection;

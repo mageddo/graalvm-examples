@@ -1,4 +1,4 @@
-package com.mageddo.entrypoint;
+package com.mageddo.fruit;
 
 
 import com.mageddo.json.JsonUtils;
