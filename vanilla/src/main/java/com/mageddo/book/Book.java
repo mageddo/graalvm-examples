@@ -1,11 +1,10 @@
-package com.mageddo.entrypoint;
+package com.mageddo.book;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class Fruit {
+public class Book {
   String name;
-  double weight;
 }
