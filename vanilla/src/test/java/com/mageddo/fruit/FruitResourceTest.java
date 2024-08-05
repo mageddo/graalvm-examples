@@ -1,8 +1,11 @@
 package com.mageddo.fruit;
 
+import com.fasterxml.jackson.databind.util.NativeImageUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class FruitResourceTest {
 
@@ -13,7 +16,7 @@ class FruitResourceTest {
     // arrange
 
     // act
-    final var json = this.resource.getSerializedAsJson();
+    final var json = this.resource.getAsJson();
 
     // assert
     assertEquals("""
@@ -25,4 +28,24 @@ class FruitResourceTest {
         "weight" : 245.3
       } ]""", json);
   }
+
+  @Test
+  void unsortedSerializedJsonCanBeDifferentOnNativeImageVersion() {
+    // arrange
+    assumeTrue(NativeImageUtil.isInNativeImage());
+
+    // act
+    final var json = this.resource.getAsUnsortedJson();
+
+    // assert
+    assertNotEquals("""
+      [ {
+        "name" : "Apple",
+        "weight" : 150.0
+      }, {
+        "name" : "Orange",
+        "weight" : 245.3
+      } ]""", json);
+  }
+
 }

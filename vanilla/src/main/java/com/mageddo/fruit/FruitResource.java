@@ -2,6 +2,7 @@ package com.mageddo.fruit;
 
 
 import com.mageddo.json.JsonUtils;
+import com.mageddo.json.UnsortedJsonUtils;
 
 import java.util.List;
 
@@ -22,8 +23,13 @@ public class FruitResource {
     );
   }
 
-  public String getSerializedAsJson(){
+  public String getAsJson(){
     final var fruits = this.get();
     return JsonUtils.writeValueAsString(fruits);
+  }
+
+  public String getAsUnsortedJson(){
+    final var fruits = this.get();
+    return UnsortedJsonUtils.writeValueAsString(fruits);
   }
 }

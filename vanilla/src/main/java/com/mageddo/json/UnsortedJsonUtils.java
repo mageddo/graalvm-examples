@@ -1,17 +1,15 @@
 package com.mageddo.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import java.io.UncheckedIOException;
 
-public class JsonUtils {
+public class UnsortedJsonUtils {
   private static final ObjectMapper objectMapper = JsonMapper.builder()
     .enable(SerializationFeature.INDENT_OUTPUT)
-    .enable(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY)
     .build()
   ;
 
