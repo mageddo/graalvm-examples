@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import nativeimage.Reflection;
 
 @Slf4j
-@Reflection(declaredConstructors = true, declaredMethods = true, scanPackage = "com.mageddo.entrypoint")
+@Reflection(declaredConstructors = true, declaredMethods = true, scanPackage = "com.mageddo.fruit")
 public class Application {
 
   public static void main(String[] args) {

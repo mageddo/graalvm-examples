@@ -1,6 +1,5 @@
-package com.mageddo;
+package com.mageddo.fruit;
 
-import com.mageddo.fruit.FruitResource;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
